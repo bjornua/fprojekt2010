@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-from fprojekt import responders
 from fprojekt.lib.session import Session
-from fprojekt.responders import notfound
 from fprojekt.utils import local, url_map
 from werkzeug import Request, Response
 from werkzeug.exceptions import NotFound
@@ -20,6 +18,8 @@ class Application(object):
         )
 
     def dispatch(self, environ, start_response):
+        from fprojekt import responders
+        notfound = responders.notfound
         try:
             local.url_adapter = url_adapter = url_map.bind_to_environ(environ)
             local.request = Request(environ)
