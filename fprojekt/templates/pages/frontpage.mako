@@ -1,2 +1,4 @@
 <%inherit file="/main.mako"/>
-<h1>Forside</h1>
+<h1>Yay!</h1>
+
+<p>Du er logget ind</p>

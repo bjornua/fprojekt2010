@@ -15,12 +15,31 @@ c = connection.cursor()
 c.execute("drop table if exists `outgoing_mail`")
 c.execute("drop table if exists `user_has_privilege`")
 c.execute("drop table if exists `user`")
+c.execute("drop table if exists `institution`")
 c.execute("drop table if exists `session`")
 c.execute("""
 create table `session` (
     `uuid` char(36) not null,
     `data` blob not null,
     primary key (`uuid`)
+)
+engine=InnoDB
+default charset=utf8
+collate=utf8_danish_ci
+pack_keys=1
+""")
+c.execute("""
+create table `institution` (
+    `id` int unsigned not null auto_increment,
+    `name` varchar(255) not null,
+    `email` varchar(255) default null,
+    `phone` varchar(255) default null,
+    `password` varchar(32) default null,
+    `deleted` bool default false,
+    primary key (`id`),
+    index `deleted` (`deleted`),
+    index `auth` (`deleted`,`password`(4)),
+    index `lookup` (`deleted`,`id`)
 )
 engine=InnoDB
 default charset=utf8
