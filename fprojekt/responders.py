@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 from werkzeug import Response, redirect
-from fprojekt.utils import expose, template_response, pool, url_for, local
-from fprojekt.lib.session import Session
+from .utils import expose, template_response, pool, url_for, local
+from .lib.session import Session
 
 
 log = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ def admin_frontpage():
 
 @expose("/administration/institution")
 def institution_list():
-    from fprojekt.models.institution import get_list
+    from .models.institution import get_list
     response = Response()
     entries = get_list()
     template_response("/pages/institution_list.mako", response, entries=entries)
@@ -52,8 +52,8 @@ def institution_list():
 
 @expose("/administration/institution/opret")
 def institution_create():
-    from fprojekt.models.institution import add_institution
-    from fprojekt.lib.string import validEmail
+    from .models.institution import add_institution
+    from .lib.string import validEmail
     input_errors = set()
     name = local.request.form.get("name", u"")
     phone = local.request.form.get("phone", u"")
@@ -91,8 +91,8 @@ def institution_create():
 
 @expose("/administration/institution/<int:id>")
 def institution_modify(id):
-    from fprojekt.models.institution import get_data, update
-    from fprojekt.lib.string import validEmail
+    from .models.institution import get_data, update
+    from .lib.string import validEmail
     response = Response()
     db_name,db_email,db_phone,db_password = get_data(id)
     input_errors = set()
@@ -140,7 +140,7 @@ def institution_modify(id):
 
 @expose("/administration/institution/<int:id>/slet")
 def institution_delete(id):
-    from fprojekt.models.institution import id_exists, delete
+    from .models.institution import id_exists, delete
     response = Response()
     if local.request.method=="POST":
         sure = local.request.form.get("sure") == "yes"

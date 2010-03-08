@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from fprojekt.lib.session import Session
-from fprojekt.utils import local, url_map
-from werkzeug import Request, Response
-from werkzeug.exceptions import NotFound
+from .lib.session import Session
+from .utils import local, url_map
+from .werkzeug import Request, Response
+from .werkzeug.exceptions import NotFound
 
 class Application(object):
     def __init__(self, debug):
         from os.path import join
         from werkzeug import SharedDataMiddleware
-        from fprojekt.utils import root_path
+        from .utils import root_path
         
         local.application = self
         self.debug = debug
@@ -18,7 +18,7 @@ class Application(object):
         )
 
     def dispatch(self, environ, start_response):
-        from fprojekt import responders
+        from . import responders
         notfound = responders.notfound
         try:
             local.url_adapter = url_adapter = url_map.bind_to_environ(environ)
