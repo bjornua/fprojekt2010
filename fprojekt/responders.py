@@ -8,20 +8,38 @@ from .lib.session import Session
 log = logging.getLogger(__name__)
 
 @expose("/")
-def frontpage():
-    response = Response()
-    login = local.session.get("login")
+def index():
+    if local.session.get("user_login") != None:
+        return redirect(url_for("user_frontpage"))
+    if local.session.get("institution_login") != None:
+        return redirect(url_for("institution_index"))
+    if local.session.get("admin_login") != None:
+        return Response("admin")
     
-    if login != None:
-        template_response("/pages/frontpage.mako", response)
-    else:
-        response = redirect(url_for("user_login"))
-    return response
+    return redirect(url_for("user_login"))
 
 @expose("/institution/login")
 def institution_login():
+    from fprojekt.models.institution import auth
+    errors = set()
+    if local.request.method == "POST":
+        password = local.request.form.get("password", "")
+        local.session["institution_login"] = auth(password)
+        if local.session.get("institution_login") != None:
+            return redirect(url_for("index"))
+        errors.add("auth_fail")
+        
+    
     response = Response()
-    template_response("/pages/institution_login.mako", response)
+    template_response("/pages/institution_login.mako", response,
+        errors = errors
+    )
+    return response
+
+@expose("/institution")
+def institution_index():
+    response = Response()
+    template_response("/pages/institution_frontpage.mako", response)
     return response
 
 @expose("/bruger/login")

@@ -38,7 +38,7 @@ create table `institution` (
     `deleted` bool default false,
     primary key (`id`),
     index `deleted` (`deleted`),
-    index `auth` (`deleted`,`password`(4)),
+    unique `auth` (`deleted`,`password`(4)),
     index `lookup` (`deleted`,`id`)
 )
 engine=InnoDB
