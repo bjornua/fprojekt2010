@@ -15,8 +15,9 @@ def index():
         return redirect(url_for("institution_frontpage"))
     if local.session.get("admin_login") != None:
         return Response("admin")
-    
-    return redirect(url_for("user_login"))
+    response = Response()
+    template_response("/pages/frontpage.mako", response)
+    return response
 
 @expose("/institution/login")
 def institution_login():
