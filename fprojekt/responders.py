@@ -296,6 +296,17 @@ def error():
 	template_response("/pages/errors/error.mako", response)
 	return response
 
+@expose("/session-debug")
+def session_debug():
+    if local.application.debug == False:
+        return notfound()
+    from pprint import pformat
+    local.session.init()
+    response = Response(pformat(local.session.data))
+    response.mimetype="text/plain"
+    response.charset = "utf-8"
+    return response
+
 @expose("/bruger")
 def user_frontpage():
     response = Response()
