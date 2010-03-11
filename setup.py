@@ -52,12 +52,15 @@ create table `user` (
     `email` varchar(255) not null,
     `password` varchar(255) not null,
     `name` varchar(255) default null,
-    `pay_id` char(10) default null,
+    `institution_id` int unsigned default null,
+    `deleted` bool default false,
     primary key (`id`),
-    unique `email` (`email`(10)),
-    unique `pay_id` (`pay_id`),
-    index `auth` (`email`(10),`password`(10)),
-    index `name` (`name`(10))
+    unique `email` (`email`),
+    index `auth` (deleted,`email`(10),`password`(10)),
+    index `name` (`name`(10)),
+    constraint `institution_id` foreign key (`institution_id`) references `institution` (`id`)
+        on delete cascade
+        on update cascade
 )
 engine=InnoDB
 default charset=utf8

@@ -3,8 +3,9 @@
 <form action="${url_for("user_login")}" method="post">
     <fieldset>
         <legend>Pædagog log-ind</legend>
-        <label for="username">Brugernavn:</label><br />
-        <input type="text" id="username" name="username"/><br />
+        <p>Forkert adgangskode eller brugernavn</p>
+        <label for="email">Email:</label><br />
+        <input type="text" id="email" value=${esc_attr(email)} name="email"/><br />
         <label for="password">Adgangskode:</label><br />
         <input id="password" type="password" name="password"/><br />
         
