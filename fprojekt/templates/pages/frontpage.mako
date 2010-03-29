@@ -24,8 +24,8 @@
         I tvivl? Ring til <strong>54 75 54 54</strong>
     </p>
 </form>
-<a id="pedagogue_activate_form" href="javascript:1" style="display:none;">Pædagog log-ind</a>
-<a id="institution_activate_form" href="javascript:1">Log ind som institution</a>
+<a id="pedagogue_activate_form" href="javascript:void()" style="display:none;">Pædagog log-ind</a>
+<a id="institution_activate_form" href="javascript:void()">Log ind som institution</a>
 <!--
 <form action="${url_for("admin_login")}" method="post" id="adminstrator_login" style="display:none;">
     <fieldset>
