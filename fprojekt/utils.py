@@ -3,8 +3,8 @@ from werkzeug import Local, LocalManager, Response
 from werkzeug.routing import Map, Rule
 from os.path import dirname, join
 from mako.lookup import TemplateLookup
-from .config import config
-from .lib import pool
+from fprojekt.config import config
+from fprojekt.lib import pool
 import MySQLdb
 
 __all__ = [
@@ -44,7 +44,7 @@ template_lookup = TemplateLookup(
 
 def template_response(templatename, response, **kwargs):
     from xml.sax.saxutils import quoteattr, escape
-    from . import widget
+    from fprojekt import widget
     template = template_lookup.get_template(templatename)
     kwargs["response"] = response
     kwargs["url_for"] = url_for
@@ -55,7 +55,7 @@ def template_response(templatename, response, **kwargs):
 
 def template_render(widgetname, **kwargs):
     from xml.sax.saxutils import quoteattr, escape
-    from . import widget
+    from fprojekt import widget
     template = template_lookup.get_template(widgetname)
     kwargs["url_for"] = url_for
     kwargs["esc_attr"] = quoteattr

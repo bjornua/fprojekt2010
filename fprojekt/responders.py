@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
 from werkzeug import Response, redirect
-from .utils import expose, template_response, pool, url_for, local
-from .lib.session import Session
+from fprojekt.utils import expose, template_response, pool, url_for, local
+from fprojekt.lib.session import Session
 
 
 log = logging.getLogger(__name__)
@@ -29,7 +29,6 @@ def institution_login():
         if local.session.get("institution_login") != None:
             return redirect(url_for("index"))
         errors.add("auth_fail")
-   
     response = Response()
     template_response("/pages/institution_login.mako", response,
         errors = errors
@@ -74,7 +73,7 @@ def admin_frontpage():
 
 @expose("/administration/institution")
 def institution_list():
-    from .models.institution import get_list
+    from fprojekt.models.institution import get_list
     response = Response()
     entries = get_list()
     template_response("/pages/institution_list.mako", response, entries=entries)
@@ -82,8 +81,8 @@ def institution_list():
 
 @expose("/administration/institution/opret")
 def institution_create():
-    from .models.institution import add_institution
-    from .lib.string import validEmail
+    from fprojekt.models.institution import add_institution
+    from fprojekt.lib.string import validEmail
     input_errors = set()
     name = local.request.form.get("name", u"")
     phone = local.request.form.get("phone", u"")
@@ -121,9 +120,9 @@ def institution_create():
 
 @expose("/administration/institution/<int:id>")
 def institution_modify(id):
-    from .models.institution import get_data, update
+    from fprojekt.models.institution import get_data, update
     from fprojekt.models.user import get_list_by_institution
-    from .lib.string import validEmail
+    from fprojekt.lib.string import validEmail
     response = Response()
     db_name,db_email,db_phone,db_password = get_data(id)
     input_errors = set()
@@ -174,7 +173,7 @@ def institution_modify(id):
 
 @expose("/administration/institution/<int:id>/slet")
 def institution_delete(id):
-    from .models.institution import id_exists, delete
+    from fprojekt.models.institution import id_exists, delete
     response = Response()
     if local.request.method=="POST":
         sure = local.request.form.get("sure") == "yes"
@@ -191,8 +190,8 @@ def institution_delete(id):
 
 @expose("/administration/institution/<int:inst_id>/bruger/opret")
 def user_create(inst_id):
-    from .models.user import add_user
-    from .lib.string import validEmail
+    from fprojekt.models.user import add_user
+    from fprojekt.lib.string import validEmail
     input_errors = set()
     name = local.request.form.get("name", u"")
     email = local.request.form.get("email", u"")
@@ -226,8 +225,8 @@ def user_create(inst_id):
 
 @expose("/administration/bruger/<int:id>")
 def user_modify(id):
-    from .models.user import get_data, update, get_instid
-    from .lib.string import validEmail
+    from fprojekt.models.user import get_data, update, get_instid
+    from fprojekt.lib.string import validEmail
     inst_id = get_instid(id)
     response = Response()
     db_name,db_email,db_password = get_data(id)
@@ -271,7 +270,7 @@ def user_modify(id):
 
 @expose("/administration/bruger/<int:id>/slet")
 def user_delete(id):
-    from .models.user import id_exists, delete, get_instid
+    from fprojekt.models.user import id_exists, delete, get_instid
     response = Response()
     inst_id = get_instid(id)
     if local.request.method=="POST":
@@ -297,7 +296,7 @@ def error():
 	template_response("/pages/errors/error.mako", response)
 	return response
 
-@expose("/session-debug")
+@expose("/debug")
 def session_debug():
     if local.application.debug == False:
         return notfound()
