@@ -11,7 +11,7 @@
     <tbody>
 % for id, title, creation_date, modification_date, wordcount in documents:
         <tr class="document_row">
-            <td><a href="${url_for("index")}">${title}</a></td>
+            <td><a href="${url_for("documentation_print",id=id)}">${title}</a></td>
             <td>${creation_date.day}/${creation_date.month}-${creation_date.year}</td>
             <td>${modification_date.day}/${modification_date.month}-${modification_date.year}</td>
             <td>${wordcount}</td>
