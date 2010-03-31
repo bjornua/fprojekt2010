@@ -23,6 +23,9 @@ def get_connection():
 
 def drop_tables(connection):
     c = connection.cursor()
+    
+    c.execute("drop table if exists `documentation_section`")
+    c.execute("drop table if exists `documentation`")
     c.execute("drop table if exists `outgoing_mail`")
     c.execute("drop table if exists `user_has_privilege`")
     c.execute("drop table if exists `user`")
@@ -106,6 +109,44 @@ def create_tables(connection):
             `error_message` text default null,
             primary key (`id`),
             key `processed`(`processed`)
+        )
+        engine=InnoDB
+        default charset=utf8
+        collate=utf8_danish_ci
+        pack_keys=1
+    """)
+    c.execute("""
+        create table `documentation` (
+            `id` int unsigned not null auto_increment,    
+            `title` varchar(255) not null,
+            `time_created` datetime not null,
+            `time_modified` datetime not null,
+            `user_id` int unsigned not null,
+            `deleted` bool not null,
+            primary key (`id`),
+            index `user_id`(`user_id`),
+            constraint `user_has_doc` foreign key (`user_id`) references `user` (`id`)
+                on delete cascade
+                on update cascade
+        )
+        engine=InnoDB
+        default charset=utf8
+        collate=utf8_danish_ci
+        pack_keys=1
+    """)
+    c.execute("""
+        create table `documentation_section` (
+            `id` int unsigned not null auto_increment,    
+            `title` varchar(255) not null,
+            `content` text not null,
+            `order` int unsigned not null,
+            `documentation_id` int unsigned not null,
+            `deleted` bool not null,
+            primary key (`id`),
+            index `order`(`order`),
+            constraint `documentation` foreign key (`documentation_id`) references `documentation` (`id`)
+                on delete cascade
+                on update cascade
         )
         engine=InnoDB
         default charset=utf8
