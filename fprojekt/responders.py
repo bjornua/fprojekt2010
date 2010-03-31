@@ -62,7 +62,13 @@ def admin_login():
 @expose("/institution")
 def institution_frontpage():
     response = Response()
-    template_response("/pages/institution_frontpage.mako", response)
+    
+    user = local.session.get("institution_login", None)
+    
+    if user == None:
+        return redirect(url_for("index"))
+    
+    template_response("/pages/institution_frontpage.mako", response)    
     return response
 
 @expose("/administration")
@@ -310,5 +316,12 @@ def session_debug():
 @expose("/bruger")
 def user_frontpage():
     response = Response()
-    template_response("/pages/user_frontpage.mako", response)
+    
+    user = local.session.get("user_login", None)
+    
+    if user == None:
+        return redirect(url_for("index"))
+    
+    template_response("/pages/user_frontpage.mako", response)    
     return response
+
