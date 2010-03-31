@@ -10,7 +10,7 @@
         <input type="submit" value="Log ind!"/>
     </fieldset>
 </form>
-<form action="${url_for("institution_login")}" method="post" id="institution_login" style="display:none;">
+<form action="${url_for("institution_login")}" method="post" id="institution_login">
     <fieldset>
         <legend>Institutions log-ind</legend>
         <label for="inst_code">Institutionskode:</label><br />
@@ -21,20 +21,8 @@
 <p>
     I tvivl? Ring til <strong>54 75 54 54</strong>
 </p>
-<a id="pedagogue_activate_form" href="javascript:void()" style="display:none;">Pædagog log-ind</a>
-<a id="institution_activate_form" href="javascript:void()">Log ind som institution</a>
-<!--
-<form action="${url_for("admin_login")}" method="post" id="adminstrator_login" style="display:none;">
-    <fieldset>
-        <legend>Administrator log-ind</legend>
-        <label for="username">Brugernavn:</label><br />
-        <input type="text" id="username" name="username"/><br />
-        <label for="password">Adgangskode:</label><br />
-        <input type="password" id="password" name="password"/><br />
-        <input type="submit" value="Log ind!"/>
-    </fieldset>
-</form>
--->
+<a id="pedagogue_activate_form" href="javascript:void()">Skift til pædagog log-ind</a>
+<a id="institution_activate_form" href="javascript:void()">Skift til institution log-ind</a>
 <script type="text/javascript">
 $(document).ready(function($){
     $("#pedagogue_activate_form").click(function () {

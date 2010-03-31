@@ -1,6 +1,6 @@
 #pedagogue_activate_form, #institution_activate_form {
     border:1px solid #000;
-    width:170px;
+    width:220px;
     padding:10px;
     display:block;
     text-align:center;
@@ -9,4 +9,6 @@
 #pedagogue_activate_form:hover, #institution_activate_form:hover {
     background:#DDD;
 }
-
+#institution_login, #pedagogue_activate_form {
+    display:none;
+}
