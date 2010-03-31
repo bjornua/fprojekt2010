@@ -12,3 +12,6 @@
 #institution_login, #pedagogue_activate_form {
     display:none;
 }
+.document_row:hover {
+    background:#CCC;
+}

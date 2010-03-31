@@ -22,13 +22,7 @@
 
 <script type="text/javascript">
 $(".document_row").css("cursor","pointer");
-$(".document_row").mouseover(function () {
-    $(this).css("background-color","#CCC");
-});
 $(".document_row").click(function () {
     window.location = $("a",this).attr("href");
-});
-$(".document_row").mouseout(function () {
-    $(this).css("background-color","transparent");
 });
 </script>
