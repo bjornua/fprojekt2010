@@ -9,9 +9,6 @@
         <input id="password" type="password" name="password"/><br />
         <input type="submit" value="Log ind!"/>
     </fieldset>
-    <p>
-        I tvivl? Ring til <strong>54 75 54 54</strong>
-    </p>
 </form>
 <form action="${url_for("institution_login")}" method="post" id="institution_login" style="display:none;">
     <fieldset>
@@ -20,10 +17,10 @@
         <input name="password" type="password"/><br/>
         <input type="submit" value="Log ind!"/>
     </fieldset>
-    <p>
-        I tvivl? Ring til <strong>54 75 54 54</strong>
-    </p>
 </form>
+<p>
+    I tvivl? Ring til <strong>54 75 54 54</strong>
+</p>
 <a id="pedagogue_activate_form" href="javascript:void()" style="display:none;">Pædagog log-ind</a>
 <a id="institution_activate_form" href="javascript:void()">Log ind som institution</a>
 <!--
@@ -42,13 +39,13 @@
 $(document).ready(function($){
     $("#pedagogue_activate_form").click(function () {
         $("#pedagogue_activate_form").css("display","none");
-        $("#institution_activate_form").show("slow");
+        $("#institution_activate_form").css("display","block");
         $("#pedagogue_login").show("slow");
         $("#institution_login").hide("fast");
     })
     $("#institution_activate_form").click(function () {
         $("#institution_activate_form").css("display","none");
-        $("#pedagogue_activate_form").show("slow");
+        $("#pedagogue_activate_form").css("display","block");
         $("#institution_login").show("slow");
         $("#pedagogue_login").hide("fast");
     })
