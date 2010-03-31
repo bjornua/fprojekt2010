@@ -143,3 +143,17 @@ def get_instid(id):
         c.close()
         pool.give(conn)
 
+def get_frontpage_data(id):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """select name
+        from user where id = %s""",
+        (id,)
+    )
+    conn.commit()
+    try:
+        return c.fetchone()
+    finally:
+        c.close()
+        pool.give(conn)

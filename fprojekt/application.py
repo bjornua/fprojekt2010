@@ -16,7 +16,7 @@ class Application(object):
                 "/static": join(root_path, "static")
             }
         )
-
+    
     def dispatch(self, environ, start_response):
         from fprojekt import responders
         notfound = responders.notfound

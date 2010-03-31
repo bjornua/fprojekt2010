@@ -313,15 +313,40 @@ def session_debug():
     response.charset = "utf-8"
     return response
 
+@expose("/dokumentation/print/<int:id>")
+def documenation_print(id):
+    response = Response()
+    from fprojekt.models.documentation import get_document, get_document_sections
+    
+    document = get_document(id)
+    if document == None:
+        return notfound()
+    
+    (doc_id, doc_title, doc_modified, user_name, user_email) = document
+    document_sections = get_document_sections(doc_id)
+    
+    template_response("/pages/document_print.mako", response,
+        document_id = doc_id,
+        document_title = doc_title,
+        document_modified = doc_modified,
+        user_name = user_name,
+        user_email = user_email,
+        document_sections = document_sections
+    )
+    return response
+
 @expose("/bruger")
 def user_frontpage():
+    from fprojekt.models.documentation import get_list_by_user
     response = Response()
+    userid = local.session.get("user_login", None)
     
-    user = local.session.get("user_login", None)
-    
-    if user == None:
+    if userid == None:
         return redirect(url_for("index"))
+    documents = get_list_by_user(userid)
     
-    template_response("/pages/user_frontpage.mako", response)    
+    template_response("/pages/user_frontpage.mako", response,
+        documents = documents
+    )
     return response
 
