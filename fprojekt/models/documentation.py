@@ -44,7 +44,7 @@ def get_document_sections(documentation_id):
     conn = pool.take()
     c = conn.cursor()
     c.execute(
-        """select title, content
+        """select id, title, content
         from documentation_section
         where
             documentation_id=%s

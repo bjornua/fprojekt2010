@@ -6,7 +6,7 @@
     d. ${document_modified.day}/${document_modified.month}-${document_modified.year}
 </p>
 
-% for title, content in document_sections:
+% for id, title, content in document_sections:
     <h3>${escape(title)}</h3>
     ${content}
 % endfor

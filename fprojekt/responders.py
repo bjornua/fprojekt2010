@@ -335,6 +335,28 @@ def documenation_print(id):
     )
     return response
 
+@expose("/dokumentation/ret/<int:id>")
+def documenation_edit(id):
+    response = Response()
+    from fprojekt.models.documentation import get_document, get_document_sections
+    
+    document = get_document(id)
+    if document == None:
+        return notfound()
+    
+    (doc_id, doc_title, doc_modified, user_name, user_email) = document
+    document_sections = get_document_sections(doc_id)
+    
+    template_response("/pages/document_edit.mako", response,
+        document_id = doc_id,
+        document_title = doc_title,
+        document_modified = doc_modified,
+        user_name = user_name,
+        user_email = user_email,
+        document_sections = document_sections
+    )
+    return response
+
 @expose("/bruger")
 def user_frontpage():
     from fprojekt.models.documentation import get_list_by_user
