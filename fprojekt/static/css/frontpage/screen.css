@@ -1,3 +1,4 @@
+/* Frontpage login */
 #pedagogue_activate_form, #institution_activate_form {
     border:1px solid #000;
     width:220px;
@@ -12,6 +13,34 @@
 #institution_login, #pedagogue_activate_form {
     display:none;
 }
+
+/* Document view */
+#document_table{
+    border: 1px solid #000;
+    border-collapse:collapse;
+}
+#document_row_header{
+    background:darkcyan;
+    border: 1px solid #000;
+    padding:0px;;
+}
+.document_row a:visited {
+    color:blue;
+}
 .document_row:hover {
     background:#CCC;
+    cursor:pointer;
+}
+.document_col_title {
+    min-width:250px;
+    max-width:700px;
+    width:auto;
+    padding:2px 10px;
+}
+.document_col_created, .document_col_modified, .document_col_word_count {
+    min-width:100px;
+    text-align:center;
+}
+.document_col_modified {
+    min-width:130px;
 }
