@@ -314,7 +314,7 @@ def session_debug():
     return response
 
 @expose("/dokumentation/print/<int:id>")
-def documenation_print(id):
+def documentation_print(id):
     response = Response()
     from fprojekt.models.documentation import get_document, get_document_sections
     
