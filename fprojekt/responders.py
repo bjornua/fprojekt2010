@@ -336,7 +336,7 @@ def documentation_print(id):
     return response
 
 @expose("/dokumentation/ret/<int:id>")
-def documenation_edit(id):
+def documentation_edit(id):
     response = Response()
     from fprojekt.models.documentation import get_document, get_document_sections
     

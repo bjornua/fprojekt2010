@@ -45,22 +45,26 @@ template_lookup = TemplateLookup(
 def template_response(templatename, response, **kwargs):
     from xml.sax.saxutils import quoteattr, escape
     from fprojekt import widget
+    import json
     template = template_lookup.get_template(templatename)
     kwargs["response"] = response
     kwargs["url_for"] = url_for
     kwargs["esc_attr"] = quoteattr
     kwargs["escape"] = escape
     kwargs["widget"] = widget
+    kwargs["json"] = json.dumps
     response.data = template.render(**kwargs)
 
 def template_render(widgetname, **kwargs):
     from xml.sax.saxutils import quoteattr, escape
     from fprojekt import widget
+    import json
     template = template_lookup.get_template(widgetname)
     kwargs["url_for"] = url_for
     kwargs["esc_attr"] = quoteattr
     kwargs["escape"] = escape
     kwargs["widget"] = widget
+    kwargs["json"] = json.dumps
     return template.render(**kwargs).decode("utf-8")
 
 pool = pool.Pool(
