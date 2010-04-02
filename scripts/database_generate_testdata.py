@@ -459,7 +459,7 @@ def generate_document_sections(connection):
         if row == None:
             break
         (id,) = row
-        for x in xrange(randint(1,3)):
+        for x in xrange(randint(3,9)):
             order = x
             title = "Unavngivet sektion %d" % x
             content = generate_section_content()
