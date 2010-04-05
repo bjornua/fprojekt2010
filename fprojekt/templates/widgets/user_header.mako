@@ -1,3 +1,3 @@
 ## -*- coding: utf-8 -*-
-<h1>PædagogNet</h1>
-<h3>Du er logget ind som ${escape(user_name)}</h3>
+<h1 id="logo">PædagogNet</h1>
+<h3 id="login-status">Du er logget ind som ${escape(user_name)}</h3>

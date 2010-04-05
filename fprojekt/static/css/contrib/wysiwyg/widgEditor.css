@@ -1,26 +1,3 @@
-/******************************************************************************
-** STRUCTURE OF DYNAMICALLY CREATED ELEMENTS
-*******************************************************************************
-**
-** <div id="ORIGINAL_IDWidgContainer" class="widgContainer">
-**     <ul id="ORIGINAL_IDWidgToolbar" class="widgToolbar">
-**         <li id="BUTTON_ID" class="widgEditButton">
-**             <a></a>
-**         </li>
-**         <li class="widgEditSelect">
-**             <select>
-**             </select>
-**         </li>
-**     </ul>
-**     <iframe id="ORIGINAL_IDWidgIframe" class="widgIframe">
-**     </iframe>
-**     <textarea id="ORIGINAL_IDWidgTextarea" class="widgEditor">
-**     </textarea>
-** </div>
-*/
-
-/* TOOLBAR BUTTONS */
-
 .widgToolbar a
 {
 	display: block;
@@ -167,11 +144,7 @@
 	padding: 0;
 }
 
-
-
-
-/* EDITOR CONTAINER */
-
 .widgContainer
 {
+    margin-right:4px;
 }

@@ -1,0 +1,43 @@
+body {
+    width:750px;
+    margin:0 auto;
+    border:1px solid #000;
+}
+
+#document_table {
+    border-spacing:0;
+    cursor:pointer;
+    width:100%;
+}
+
+#document_table tbody tr:hover {
+    background: #CCC;
+}
+
+
+
+#editor_area {
+}
+#editor_area #title_field, #editor_area #author_field, #editor_area .section_field {
+    background: #DDD;
+}
+
+#editor_area .section_editor {
+    display:block;
+    width:30px;
+    height:400px;
+}
+
+#editor_area .section_container {
+    width:730px;
+    margin:0 auto;
+    
+}
+
+#logo {
+    margin-bottom:5px;
+}
+#login-status {
+    border-bottom:1px solid #000;
+    margin-top:0;
+}
