@@ -1,23 +1,18 @@
+html
+{
+  overflow-y: scroll;
+}
+
 body {
     width:750px;
-    margin:0 auto;
+    margin:40px auto 20px auto;
     border:1px solid #000;
+    
 }
-
-#document_table {
-    border-spacing:0;
-    cursor:pointer;
-    width:100%;
-}
-
-#document_table tbody tr:hover {
-    background: #CCC;
-}
-
-
 
 #editor_area {
 }
+
 #editor_area #title_field, #editor_area #author_field, #editor_area .section_field {
     background: #DDD;
 }
@@ -31,13 +26,51 @@ body {
 #editor_area .section_container {
     width:730px;
     margin:0 auto;
-    
 }
 
 #logo {
     margin-bottom:5px;
 }
+
 #login-status {
     border-bottom:1px solid #000;
     margin-top:0;
+}
+
+
+#document_table {
+    border-collapse:collapse;
+    width:100%;
+}
+#document_table thead tr{
+    white-space:nowrap;
+    background: darkcyan;
+    padding: 0px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+#document_table tbody tr {
+    cursor:pointer;
+}
+#document_table a:visited {
+    color:blue;
+}
+
+#document_table tbody tr:hover {
+    background: #CCC;
+}
+
+#document_table .col_title {
+    width: 100%;
+    padding-left: 10px;
+}
+#document_table tbody tr td {
+    padding: 2px 40px;
+}
+#document_table .col_word_count {
+    padding-right:10px;
+}
+#document_table .col_created, #document_table .col_modified, #document_table .col_word_count {
+    white-space:nowrap;
+    text-align: center;
 }
