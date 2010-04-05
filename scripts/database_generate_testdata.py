@@ -472,9 +472,15 @@ def generate_document_sections(connection):
     c.close()
     
 if __name__ == "__main__":
+    print "Connecting to database"
     connection = get_connection()
+    print "Generating fake institutions"
     generate_institutions(connection)
+    print "Generating fake users"
     generate_users(connection)
+    print "Generating fake documents"
     generate_documents(connection)
+    print "Generating fake document sections"
     generate_document_sections(connection)
+    print "Disconnecting from database (might take a while)"
     connection.close()
