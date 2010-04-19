@@ -1,4 +1,4 @@
-<%inherit file="/main.mako"/>
+<%inherit file="/frontpage.mako"/>
 <h1>Velkommen til PædagogNet</h1>
 <form action="${url_for("user_login")}" method="post" id="pedagogue_login">
     <fieldset>
