@@ -1,12 +1,13 @@
-from fprojekt.utils import pool
+from fprojekt.utils import pool, local
 from random import sample
+
 
 characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 def _generate_password():
     password = "".join(sample(characters,16))
     return password
 
-def auth(email,password):
+def login(email,password):
     conn = pool.take()
     c = conn.cursor()
     c.execute(
@@ -15,13 +16,17 @@ def auth(email,password):
         (email,password)
     )
     conn.commit()
-    try:
-        return c.fetchone()[0]
-    except TypeError:
-        return None
-    finally:
-        c.close()
-        pool.give(conn)
+    row = c.fetchone()
+    c.close()
+    pool.give(conn)
+    if row == None:
+        return False
+    (id,) = row
+    local.session["login_user"] = id
+    return True
+def logout():
+    local.session["login_user"] = None
+    
 
 def get_list_by_institution(inst_id):
     conn = pool.take()
@@ -147,8 +152,9 @@ def get_frontpage_data(id):
     conn = pool.take()
     c = conn.cursor()
     c.execute(
-        """select name
-        from user where id = %s""",
+        """
+        select name from user where id = %s
+        """,
         (id,)
     )
     conn.commit()
@@ -157,3 +163,13 @@ def get_frontpage_data(id):
     finally:
         c.close()
         pool.give(conn)
+
+def is_authed():
+    return local.session.get("login_user") != None
+def get_session_user_id():
+    return local.session.get("login_user")
+
+
+
+
+

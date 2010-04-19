@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from fprojekt.utils import pool
+from fprojekt.utils import pool, local
 from random import sample
 
 characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
@@ -90,7 +90,7 @@ def update(id, name, email, phone, password):
     c.close()
     pool.give(conn)
     
-def auth(password):
+def login(password):
     conn = pool.take()
     c = conn.cursor()
     c.execute(
@@ -99,17 +99,24 @@ def auth(password):
         (password,)
     )
     conn.commit()
-    try:
-        return c.fetchone()[0]
-    except TypeError:
-        return None
-    finally:
-        c.close()
-        pool.give(conn)
-    
-    
-    
-    
+    row = c.fetchone()
+    c.close()
+    pool.give(conn)
+    if row == None:
+        return False
+    (id,) = row
+    local.session["login_institution"] = id
+    return True
+
+def logout():
+    local.session["login_institution"] = None
+
+def is_authed():
+    return local.session.get("login_institution") != None
+def get_session_institution_id():
+    return local.session.get("login_institution")
+
+        
     
     
     

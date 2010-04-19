@@ -1,5 +1,4 @@
 <%inherit file="/main_user.mako"/>
-
 <table id="document_table">
     <thead>
         <tr>

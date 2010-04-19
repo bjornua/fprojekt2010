@@ -3,17 +3,16 @@ import logging
 from werkzeug import Response, redirect
 from fprojekt.utils import expose, template_response, pool, url_for, local
 from fprojekt.lib.session import Session
-
-
+from fprojekt.models import user, institution, admin
 log = logging.getLogger(__name__)
 
 @expose("/")
 def index():
-    if local.session.get("user_login") != None:
+    if user.is_authed():
         return redirect(url_for("user_frontpage"))
-    if local.session.get("institution_login") != None:
+    if institution.is_authed():
         return redirect(url_for("institution_frontpage"))
-    if local.session.get("admin_login") != None:
+    if admin.is_authed():
         return Response("admin")
     response = Response()
     template_response("/pages/frontpage.mako", response)
@@ -21,12 +20,11 @@ def index():
 
 @expose("/institution/login")
 def institution_login():
-    from fprojekt.models.institution import auth
     errors = set()
     if local.request.method == "POST":
         password = local.request.form.get("password", u"")
-        local.session["institution_login"] = auth(password)
-        if local.session.get("institution_login") != None:
+        is_authed = institution.login(password)
+        if is_authed:
             return redirect(url_for("index"))
         errors.add("auth_fail")
     response = Response()
@@ -34,6 +32,10 @@ def institution_login():
         errors = errors
     )
     return response
+@expose("/institution/logout")
+def institution_logout():
+    institution.logout()
+    return redirect (url_for("index"))
 
 @expose("/bruger/login")
 def user_login():
@@ -42,9 +44,8 @@ def user_login():
     email = local.request.form.get("email", "")
     password = local.request.form.get("password", "")
     if local.request.method == "POST":
-        from fprojekt.models.user import auth
-        local.session["user_login"] = auth(email,password)
-        if local.session.get("user_login") != None:
+        is_authed = user.login(email,password)
+        if is_authed:
             return redirect(url_for("index"))
         errors.add("auth_fail")
     template_response("/pages/user_login.mako", response,
@@ -52,6 +53,11 @@ def user_login():
         errors = errors
     )
     return response
+
+@expose("/bruger/logout")
+def user_logout():
+    user.logout()
+    return redirect (url_for("index"))
 
 @expose("/administration/login")
 def admin_login():
@@ -63,10 +69,10 @@ def admin_login():
 def institution_frontpage():
     response = Response()
     
-    user = local.session.get("institution_login", None)
-    
-    if user == None:
+    if not institution.is_authed():
         return redirect(url_for("index"))
+
+    id = institution.get_session_institution_id()
     
     template_response("/pages/institution_frontpage.mako", response)    
     return response
@@ -360,11 +366,14 @@ def documentation_edit(id):
 @expose("/bruger")
 def user_frontpage():
     from fprojekt.models.documentation import get_list_by_user
+    from fprojekt.models.user import is_authed, get_session_user_id
     response = Response()
-    userid = local.session.get("user_login", None)
     
-    if userid == None:
+    if not is_authed():
         return redirect(url_for("index"))
+    
+    userid = get_session_user_id()
+    
     documents = get_list_by_user(userid)
     
     template_response("/pages/user_frontpage.mako", response,
