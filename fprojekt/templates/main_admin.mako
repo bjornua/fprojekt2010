@@ -1,2 +1,2 @@
-<%inherit file="/main.mako"/>
+<%inherit file="/subpage.mako"/>
 ${next.body()}

@@ -1,4 +1,4 @@
-<%inherit file="/main.mako"/>
+<%inherit file="/subpage.mako"/>
 <h1>${escape(document_title)}</h1>
 <p>
     Skrevet af ${escape(user_name)}

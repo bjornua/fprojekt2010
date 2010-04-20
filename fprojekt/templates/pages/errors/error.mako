@@ -1,4 +1,4 @@
-<%inherit file="/main.mako"/>
+<%inherit file="/subpage.mako"/>
 <%
     response.status_code = 500
 %>

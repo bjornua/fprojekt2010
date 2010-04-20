@@ -1,4 +1,4 @@
-<%inherit file="/main.mako"/>
+<%inherit file="/subpage.mako"/>
 <h1>Projekt X</h1>
 <form action="${url_for("institution_login")}" method="post">
     <fieldset>
