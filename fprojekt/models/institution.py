@@ -82,14 +82,16 @@ def delete(id):
 def update(id, name, email, phone, password):
     conn = pool.take()
     c = conn.cursor()
-    c.execute(
-        """update institution set name=%s, email=%s, phone=%s, password=%s
-        where id=%s and deleted=false""",
-        (name, email, phone, password, id)
-    )
-    conn.commit()
-    c.close()
-    pool.give(conn)
+    try:
+        c.execute(
+            """update institution set name=%s, email=%s, phone=%s, password=%s
+            where id=%s and deleted=false""",
+            (name, email, phone, password, id)
+        )
+    finally:
+        conn.commit()
+        c.close()
+        pool.give(conn)
     
 def login(password):
     conn = pool.take()
