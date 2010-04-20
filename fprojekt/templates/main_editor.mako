@@ -7,5 +7,7 @@
     <link media="screen" rel="stylesheet" type="text/css" href="/static/css/subpage/screen.css"/>
     <link media="screen" rel="stylesheet" type="text/css" href="/static/css/contrib/wysiwyg/widgEditor.css"/>
 </head>
+<div id="main">
 ${widget.user_header()}
 ${next.body()}
+</div>

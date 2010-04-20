@@ -2,14 +2,19 @@ html
 {
   overflow-y: scroll;
 }
-
 body {
+    background: url('/static/images/background.png') #000 no-repeat center top;
+}
+
+#main {
+    background:url('/static/images/trans.png');
     width:750px;
-    margin:40px auto 20px -375px;
+    margin:40px auto 20px -395px;
     border:1px solid #000;
     float:left;
     position:relative;
     left:50%;
+    padding:10px 20px;
 }
 
 #editor_area {
@@ -88,4 +93,20 @@ body {
 #inst_login > table td{
     text-align:center;
 
+}
+
+
+#pedagogue_activate_form, #institution_activate_form {
+    border:1px solid #000;
+    width:220px;
+    padding:10px;
+    display:block;
+    text-align:center;
+    background:#BBB;
+}
+#pedagogue_activate_form:hover, #institution_activate_form:hover {
+    background:#DDD;
+}
+#institution_login, #pedagogue_activate_form {
+    display:none;
 }

@@ -5,4 +5,6 @@
     <script type="text/javascript" src="/static/javascript/contrib/jquery-1.4.2.min.js"></script>
     <link media="screen" rel="stylesheet" type="text/css" href="/static/css/subpage/screen.css"/>
 </head>
+<div id="main">
 ${next.body()}
+</div>
