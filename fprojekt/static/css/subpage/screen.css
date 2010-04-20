@@ -5,10 +5,11 @@ html
 
 body {
     width:750px;
-    margin:40px auto 20px auto;
+    margin:40px auto 20px -375px;
     border:1px solid #000;
     float:left;
-    
+    position:relative;
+    left:50%;
 }
 
 #editor_area {
