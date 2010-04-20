@@ -78,23 +78,6 @@ def get_data(id):
         c.close()
         pool.give(conn)
 
-def get_list():
-    conn = pool.take()
-    c = conn.cursor()
-    c.execute(
-        """select id, name, email, phone from institution where deleted=false"""
-    )
-    conn.commit()
-    try:
-        while True:
-            row = c.fetchone()
-            if row == None:
-                break
-            yield row
-    finally:
-        c.close()
-        pool.give(conn)
-
 def id_exists(id):
     conn = pool.take()
     c = conn.cursor()
@@ -171,5 +154,23 @@ def get_session_user_id():
 
 
 
-
+def get_inst_login_users(inst_id):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """select name, email
+        from user
+        where institution_id=%s and deleted=false""",
+        (inst_id,)
+    )
+    conn.commit()
+    try:
+        while True:
+            row = c.fetchone()
+            if row == None:
+                break
+            yield row
+    finally:
+        c.close()
+        pool.give(conn)
 

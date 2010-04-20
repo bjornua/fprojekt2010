@@ -1,5 +1,5 @@
-<%inherit file="/main.mako"/>
-<h1>Projekt X</h1>
+<%inherit file="/subpage.mako"/>
+<h1>PædagogNet</h1>
 <form action="${url_for("user_login")}" method="post">
     <fieldset>
         <legend>Pædagog log-ind</legend>

@@ -36,6 +36,7 @@ def get_data(id):
         c.close()
         pool.give(conn)
 
+
 def get_list():
     conn = pool.take()
     c = conn.cursor()
@@ -108,9 +109,42 @@ def login(password):
     local.session["login_institution"] = id
     return True
 
+def get_name(id):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """select name
+        from institution where id = %s and deleted=false""",
+        (id,)
+    )
+    conn.commit()
+    try:
+        return c.fetchone()[0]
+    finally:
+        c.close()
+        pool.give(conn)
+
+def get_users(id):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """select id, name, email, phone from institution where deleted=false"""
+    )
+    conn.commit()
+    try:
+        while True:
+            row = c.fetchone()
+            if row == None:
+                break
+            yield row
+    finally:
+        c.close()
+        pool.give(conn)
+    
+
+
 def logout():
     local.session["login_institution"] = None
-
 def is_authed():
     return local.session.get("login_institution") != None
 def get_session_institution_id():
@@ -119,4 +153,4 @@ def get_session_institution_id():
         
     
     
-    
+

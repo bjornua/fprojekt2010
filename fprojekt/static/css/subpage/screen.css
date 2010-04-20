@@ -7,6 +7,7 @@ body {
     width:750px;
     margin:40px auto 20px auto;
     border:1px solid #000;
+    float:left;
     
 }
 
@@ -73,4 +74,17 @@ body {
 #document_table .col_created, #document_table .col_modified, #document_table .col_word_count {
     white-space:nowrap;
     text-align: center;
+}
+
+#inst_login {
+}
+
+#inst_login > table {
+    margin:0 auto;
+    border: 1px solid #000;
+    border-spacing: 30px 10px;
+}
+#inst_login > table td{
+    text-align:center;
+
 }

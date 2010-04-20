@@ -3,7 +3,7 @@ import logging
 from werkzeug import Response, redirect
 from fprojekt.utils import expose, template_response, pool, url_for, local
 from fprojekt.lib.session import Session
-from fprojekt.models import user, institution, admin
+from fprojekt.models import user, institution, admin, documentation
 log = logging.getLogger(__name__)
 
 @expose("/")
@@ -38,10 +38,11 @@ def institution_logout():
     return redirect (url_for("index"))
 
 @expose("/bruger/login")
-def user_login():
+@expose("/bruger/login/<string:email>")
+def user_login(email=""):
     errors = set()
     response = Response()
-    email = local.request.form.get("email", "")
+    email = local.request.form.get("email", email)
     password = local.request.form.get("password", "")
     if local.request.method == "POST":
         is_authed = user.login(email,password)
@@ -73,8 +74,12 @@ def institution_frontpage():
         return redirect(url_for("index"))
 
     id = institution.get_session_institution_id()
-    
-    template_response("/pages/institution_frontpage.mako", response)    
+    name = institution.get_name(id)
+    users = user.get_inst_login_users(id)
+    template_response("/pages/institution_frontpage.mako", response,
+        name = name,
+        users = users
+    )
     return response
 
 @expose("/administration")
