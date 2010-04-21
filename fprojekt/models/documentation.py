@@ -39,7 +39,6 @@ def get_document(id):
         c.close()
         pool.give(conn)
 
-
 def get_document_sections(documentation_id):
     conn = pool.take()
     c = conn.cursor()
@@ -62,3 +61,22 @@ def get_document_sections(documentation_id):
     finally:
         c.close()
         pool.give(conn)
+
+
+def update_section(id, title, content):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """update documentation_section
+        set title=%s, content=%s
+        where id=%s
+        and deleted=false""",
+        (title, content, id)
+    )
+    try:
+        conn.commit()
+        return c.fetchone()
+    finally:
+        c.close()
+        pool.give(conn)
+

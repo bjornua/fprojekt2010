@@ -368,6 +368,19 @@ def documentation_edit(id):
     )
     return response
 
+@expose("/dokumentation/gem")
+def document_save():
+    response = Response()
+    from fprojekt.models.documentation import update_section
+    import json
+    section_json = local.request.form.get("section")
+    section = json.loads(section_json)
+    id = section["id"]
+    title = section["title"]
+    content = section["content"]
+    update_section(id, title, content)
+    return response
+
 @expose("/bruger")
 def user_frontpage():
     from fprojekt.models.documentation import get_list_by_user
