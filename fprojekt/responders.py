@@ -18,6 +18,22 @@ def index():
     template_response("/pages/frontpage.mako", response)
     return response
 
+@expose("/institution")
+def institution_frontpage():
+    response = Response()
+    
+    if not institution.is_authed():
+        return redirect(url_for("index"))
+
+    id = institution.get_session_institution_id()
+    name = institution.get_name(id)
+    users = user.get_inst_login_users(id)
+    template_response("/pages/institution_frontpage.mako", response,
+        name = name,
+        users = users
+    )
+    return response
+
 @expose("/institution/login")
 def institution_login():
     errors = set()
@@ -36,6 +52,24 @@ def institution_login():
 def institution_logout():
     institution.logout()
     return redirect (url_for("index"))
+
+@expose("/bruger")
+def user_frontpage():
+    from fprojekt.models.documentation import get_list_by_user
+    from fprojekt.models.user import is_authed, get_session_user_id
+    response = Response()
+    
+    if not is_authed():
+        return redirect(url_for("index"))
+    
+    userid = get_session_user_id()
+    
+    documents = get_list_by_user(userid)
+    
+    template_response("/pages/user_frontpage.mako", response,
+        documents = documents
+    )
+    return response
 
 @expose("/bruger/login")
 @expose("/bruger/login/<string:email>")
@@ -60,32 +94,16 @@ def user_logout():
     user.logout()
     return redirect (url_for("index"))
 
-@expose("/administration/login")
-def admin_login():
-    response = Response()
-    template_response("/pages/admin_login.mako", response)
-    return response
-
-@expose("/institution")
-def institution_frontpage():
-    response = Response()
-    
-    if not institution.is_authed():
-        return redirect(url_for("index"))
-
-    id = institution.get_session_institution_id()
-    name = institution.get_name(id)
-    users = user.get_inst_login_users(id)
-    template_response("/pages/institution_frontpage.mako", response,
-        name = name,
-        users = users
-    )
-    return response
-
 @expose("/administration")
 def admin_frontpage():
     response = Response()
     template_response("/pages/admin_frontpage.mako", response)
+    return response
+
+@expose("/administration/login")
+def admin_login():
+    response = Response()
+    template_response("/pages/admin_login.mako", response)
     return response
 
 @expose("/administration/institution")
@@ -303,27 +321,6 @@ def user_delete(id):
         )
     return response
 
-def notfound():
-    response = Response()
-    template_response("/pages/errors/notfound.mako", response)
-    return response
-
-def error():
-	response = Response()
-	template_response("/pages/errors/error.mako", response)
-	return response
-
-@expose("/debug")
-def session_debug():
-    if local.application.debug == False:
-        return notfound()
-    from pprint import pformat
-    local.session.init()
-    response = Response(pformat(local.session.data))
-    response.mimetype="text/plain"
-    response.charset = "utf-8"
-    return response
-
 @expose("/dokumentation/print/<int:id>")
 def documentation_print(id):
     response = Response()
@@ -381,21 +378,24 @@ def document_save():
     update_section(id, title, content)
     return response
 
-@expose("/bruger")
-def user_frontpage():
-    from fprojekt.models.documentation import get_list_by_user
-    from fprojekt.models.user import is_authed, get_session_user_id
+def notfound():
     response = Response()
-    
-    if not is_authed():
-        return redirect(url_for("index"))
-    
-    userid = get_session_user_id()
-    
-    documents = get_list_by_user(userid)
-    
-    template_response("/pages/user_frontpage.mako", response,
-        documents = documents
-    )
+    template_response("/pages/errors/notfound.mako", response)
+    return response
+
+def error():
+	response = Response()
+	template_response("/pages/errors/error.mako", response)
+	return response
+
+@expose("/debug")
+def session_debug():
+    if local.application.debug == False:
+        return notfound()
+    from pprint import pformat
+    local.session.init()
+    response = Response(pformat(local.session.data))
+    response.mimetype="text/plain"
+    response.charset = "utf-8"
     return response
 
