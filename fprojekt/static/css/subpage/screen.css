@@ -273,38 +273,43 @@ html
 #main-navigation #link-documentation {
     background:#5964B2;
 }
-#main-navigation #link-documentation:hover {
+#main-navigation #link-documentation:hover, #main-navigation #link-documentation.topmenu-active {
     background:#4B538B;
 }
 body>#main.section-documentation {
     background:url('/static/images/trans-documentation.png');
+    border:2px solid #4B538B;
 }
 #main-navigation #link-curriculum {
     background:#E04885;
 }
-#main-navigation #link-curriculum:hover {
+#main-navigation #link-curriculum:hover, #main-navigation #link-curriculum.topmenu-active {
     background:#D60257;
 }
 body>#main.section-curriculum {
     background:url('/static/images/trans-curriculum.png');
+    border:2px solid #D60257;
 }
 #main-navigation #link-evaluation {
     background:#FA6A48;
 }
-#main-navigation #link-evaluation:hover {
+#main-navigation #link-evaluation:hover, #main-navigation #link-evaluation.topmenu-active {
     background:#E45635;
 }
 body>#main.section-evaluation {
     background:url('/static/images/trans-evaluation.png');
+    border:2px solid #E45635;
 }
 #main-navigation #link-other {
-    background:#F28D16;
+    background: #F28D16;
 }
-#main-navigation #link-other:hover {
-    background:#E97F02;
+#main-navigation #link-other:hover, #main-navigation #link-other.topmenu-active  {
+    background: #E97F02;
 }
+
 body>#main.section-other {
-    background:url('/static/images/trans-other.png');
+    background: url('/static/images/trans-other.png');
+    border: 2px solid #E45635;
 }
 
 /* User profile page */
