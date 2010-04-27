@@ -3,7 +3,7 @@
     links = (
         (u"Dokumentation", "documentation", url_for("user_frontpage")),
         (u"Læreplaner"   , "curriculum"   , url_for("curriculum_frontpage")),
-        (u"Evaluation"   , "evaluation"   , url_for("evaluation_frontpage")),
+        (u"Evaluering"   , "evaluation"   , url_for("evaluation_frontpage")),
         (u"Andet"        , "other"        , url_for("admin_frontpage")),
     )
 %>
