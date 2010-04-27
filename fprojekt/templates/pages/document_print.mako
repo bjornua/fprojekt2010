@@ -1,4 +1,10 @@
 <%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return kwargs["document_title"]
+    def section(kwargs):
+        return "documentation"
+%>
 <h1>${escape(document_title)}</h1>
 <p>
     Skrevet af ${escape(user_name)}

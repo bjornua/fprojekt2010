@@ -1,8 +1,13 @@
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return kwargs["name"]
+    def section(kwargs):
+        return "other"
+%>
 <%
-    from random import randint
     count = 0
 %>
-<%inherit file="/subpage.mako"/>
 <h1>${escape(name)}</h1>
 <p>
     <a href=${esc_attr(url_for("institution_logout"))}>

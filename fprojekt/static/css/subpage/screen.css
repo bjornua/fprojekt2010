@@ -139,7 +139,6 @@ html
 }
 
 #main {
-    background:url('/static/images/trans.png');
     width:750px;
     margin:40px auto 20px -395px;
     border:1px solid #000;
@@ -242,3 +241,70 @@ html
 #institution_login, #pedagogue_activate_form {
     display:none;
 }
+
+
+#topmenu{
+    float:left;
+    width:100%;
+    border-bottom:1px solid #000;
+    margin:0 0 20px 0;
+}
+
+#main-navigation {
+    float: right;
+    padding: 5px;
+}
+
+#main-navigation > li{
+    float: left;
+    margin: 0 0 0 5px;
+    list-style-type: none;
+}
+
+#main-navigation > li > a {
+    border:1px solid #000;
+    color:#FFF;
+    padding:5px;
+    float:left;
+}
+
+#main-navigation li:first-child {
+    margin: 0 0 0 0;
+}
+#main-navigation #link-documentation {
+    background:#5964B2;
+}
+#main-navigation #link-documentation:hover {
+    background:#4B538B;
+}
+body>#main.section-documentation {
+    background:url('/static/images/trans-documentation.png');
+}
+#main-navigation #link-curriculum {
+    background:#E04885;
+}
+#main-navigation #link-curriculum:hover {
+    background:#D60257;
+}
+body>#main.section-curriculum {
+    background:url('/static/images/trans-curriculum.png');
+}
+#main-navigation #link-evaluation {
+    background:#FA6A48;
+}
+#main-navigation #link-evaluation:hover {
+    background:#E45635;
+}
+body>#main.section-evaluation {
+    background:url('/static/images/trans-evaluation.png');
+}
+#main-navigation #link-other {
+    background:#F28D16;
+}
+#main-navigation #link-other:hover {
+    background:#E97F02;
+}
+body>#main.section-other {
+    background:url('/static/images/trans-other.png');
+}
+

@@ -1,4 +1,10 @@
 <%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return "Fejl"
+    def section(kwargs):
+        return "other"
+%>
 <%
     response.status_code = 500
 %>

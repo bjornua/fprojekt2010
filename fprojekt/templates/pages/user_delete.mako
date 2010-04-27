@@ -1,4 +1,10 @@
-<%inherit file="/main_admin.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(self):
+        return u"Bekræft sletning"
+    def section(self):
+        return "other"
+%>
 <h1>Bekræftelse af sletning</h1>
 <form action="${url_for("user_delete",id=id)}" method="post">
     <p>Er du sikker på at du vil slette denne bruger?</p>

@@ -10,3 +10,6 @@ def user_header():
         user_name = user_name
     )
 
+def topmenu():
+    return template_render("widgets/topmenu.mako")
+

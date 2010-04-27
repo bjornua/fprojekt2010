@@ -1,4 +1,10 @@
-<%inherit file="/main_admin.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return "Opret bruger"
+    def section(kwargs):
+        return "other"
+%>
 <h1>Opret ny bruger</h1>
 <form action="${url_for("user_create",inst_id=inst_id)}" method="post">
 % if "name_empty" in input_errors:

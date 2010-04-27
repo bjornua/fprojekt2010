@@ -1,4 +1,10 @@
 <%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return "Login"
+    def section(kwargs):
+        return "other"
+%>
 <h1>PædagogNet</h1>
 <form action="${url_for("user_login")}" method="post">
     <fieldset>

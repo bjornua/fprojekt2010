@@ -1,5 +1,11 @@
 <%inherit file="/subpage.mako"/>
-<h1>Projekt X</h1>
+<%!
+    def title(self):
+        return "Administration login"
+    def section(self):
+        return "other"
+%>
+<h1>PædagogNet</h1>
 <form action="${url_for("admin_login")}" method="post">
     <fieldset>
         <legend>Administrator log-ind</legend>

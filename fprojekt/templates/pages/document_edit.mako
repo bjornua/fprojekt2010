@@ -1,4 +1,10 @@
 <%inherit file="/main_editor.mako"/>
+<%!
+    def title(kwargs):
+        return "Redigér: " + kwargs["document_title"]
+    def section(kwargs):
+        return "documentation"
+%>
 <%
 initial_doc = {
     "title": document_title,
@@ -6,10 +12,6 @@ initial_doc = {
     "sections": [{"id":x[0],"title":x[1],"content":x[2]} for x in document_sections]
 }
 %>
-
-
-
-
 <form id="editor_area">
     <h1><span id="title_field"></span></h1>
     <h3>Skrevet af <span id="author_field"></span></h3>
@@ -24,6 +26,7 @@ $("#title_field").text(doc.title);
 
 for(i in doc.sections){
     section = doc.sections[i];
+    
     section.elements = {
         "container": document.createElement("div"),
         "title": document.createElement("h3"),

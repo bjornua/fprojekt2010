@@ -1,4 +1,10 @@
-<%inherit file="/main_user.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return kwargs["username"]
+    def section(kwargs):
+        return "documentation"
+%>
 <table id="document_table">
     <thead>
         <tr>

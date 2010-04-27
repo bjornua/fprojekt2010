@@ -1,4 +1,10 @@
-<%inherit file="/main_admin.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return kwargs["name"]
+    def section(kwargs):
+        return "other"
+%>
 <h1>Bruger: ${escape(db_name)} <${escape(db_email)}></h1>
 <p>
     <a href="${url_for("user_delete",id=id)}">

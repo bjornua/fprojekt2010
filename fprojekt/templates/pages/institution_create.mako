@@ -1,4 +1,10 @@
 <%inherit file="/main_admin.mako"/>
+<%!
+    def title(kwargs):
+        return "Opret institution"
+    def section(kwargs):
+        return "other"
+%>
 <h1>Opret ny institution</h1>
 <form action="${url_for("institution_create")}" method="post">
 % if "name_empty" in input_errors:

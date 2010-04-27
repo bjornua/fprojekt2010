@@ -1,4 +1,12 @@
-<%inherit file="/main_admin.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return "Institutionsliste"
+    def section(kwargs):
+        return "other"
+%>
+<%def name="title()">Institutionsliste</%def>
+<%def name="section()">other</%def>
 <h1>Institutioner</h1>
 <ul>
     <li>

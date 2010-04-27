@@ -1,3 +1,9 @@
+<%!
+    def title(kwargs):
+        return "Velkommen"
+    def section(kwargs):
+        return "other"
+%>
 <%inherit file="/subpage.mako"/>
 <h1>Velkommen til PædagogNet</h1>
 <form action="${url_for("user_login")}" method="post" id="pedagogue_login">

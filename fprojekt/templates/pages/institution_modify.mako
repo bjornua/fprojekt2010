@@ -1,4 +1,10 @@
-<%inherit file="/main_admin.mako"/>
+<%inherit file="/subpage.mako"/>
+<%!
+    def title(kwargs):
+        return kwargs["name"]
+    def section(kwargs):
+        return "other"
+%>
 <h1>Institution: ${escape(db_name)} (${escape(db_email)})</h1>
 <p>
     <a href="${url_for("institution_list")}">Tilbage til liste</a>

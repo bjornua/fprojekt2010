@@ -294,7 +294,7 @@ def user_delete(id):
         sure = local.request.form.get("sure") == "yes"
         if sure:
             delete(id)
-            response = redirect(url_for("user_list", inst_id=inst_id))
+            response = redirect(url_for("institution_modify", id=inst_id))
         else:
             response = redirect(url_for("user_modify", id=id))
     else:
@@ -371,18 +371,31 @@ def documentation_edit(id):
 @expose("/bruger")
 def user_frontpage():
     from fprojekt.models.documentation import get_list_by_user
-    from fprojekt.models.user import is_authed, get_session_user_id
+    from fprojekt.models.user import is_authed, get_session_user_id, get_frontpage_data
     response = Response()
     
     if not is_authed():
         return redirect(url_for("index"))
     
     userid = get_session_user_id()
-    
+    username, = get_frontpage_data(userid)
     documents = get_list_by_user(userid)
     
     template_response("/pages/user_frontpage.mako", response,
+        username = username,
         documents = documents
     )
     return response
 
+@expose("/laereplan")
+def curriculum_frontpage():
+    response = Response()
+    template_response("/pages/curriculum_frontpage.mako", response)
+    return response
+
+
+@expose("/evaluering")
+def evaluation_frontpage():
+    response = Response()
+    template_response("/pages/evaluation_frontpage.mako", response)
+    return response
