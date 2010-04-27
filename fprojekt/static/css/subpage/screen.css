@@ -166,9 +166,14 @@ html
     margin:0 auto;
 }
 
-#logo {
-    margin-bottom:5px;
+#logotext {
+    margin: 0;
+    font-size: 240%;
+    background: #CCC;
+    border: 1px solid #000;
+    padding: 5px 50px;
 }
+
 
 #login-status {
     border-bottom:1px solid #000;
@@ -246,12 +251,14 @@ html
     float:left;
     width:100%;
     border-bottom:1px solid #000;
-    margin:0 0 20px 0;
+    margin:10px 0 20px 0;
+    padding-bottom: 10px;
 }
 
 #main-navigation {
+    margin: 0;
     float: right;
-    padding: 5px;
+    padding: 0 5px;
 }
 
 #main-navigation > li{
@@ -265,8 +272,15 @@ html
     color:#FFF;
     padding:5px;
     float:left;
+    text-decoration: none;
+    vertical-align: middle;
+    display: block;
 }
-
+#main-navigation > li > a > img{
+    float:left;
+    padding-right:5px;
+    display:block;
+}
 #main-navigation li:first-child {
     margin: 0 0 0 0;
 }

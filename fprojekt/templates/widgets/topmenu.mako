@@ -13,7 +13,7 @@
     </h1>
     <ul id="main-navigation">
 % for name, section, link in links:
-        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${link}">${name}</a></li>
+        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${link}"><img src="/static/images/icons/${section}.png"/> ${name}</a></li>
 % endfor
     </ul>
 </div>
