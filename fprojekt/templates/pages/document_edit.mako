@@ -1,7 +1,7 @@
-<%inherit file="/main_editor.mako"/>
+<%inherit file="/subpage.mako"/>
 <%!
     def title(kwargs):
-        return "Redigér: " + kwargs["document_title"]
+        return u"Redigér: " + kwargs["document_title"]
     def section(kwargs):
         return "documentation"
 %>
@@ -67,7 +67,6 @@ function save(){
     }
 }
 </script>
-
 <input type="button" value="Gem" id="save_documentation" onclick="javascript:save();" />
 </form>
 
