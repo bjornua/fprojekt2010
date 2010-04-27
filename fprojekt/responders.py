@@ -18,6 +18,22 @@ def index():
     template_response("/pages/frontpage.mako", response)
     return response
 
+@expose("/institution")
+def institution_frontpage():
+    response = Response()
+    
+    if not institution.is_authed():
+        return redirect(url_for("index"))
+
+    id = institution.get_session_institution_id()
+    name = institution.get_name(id)
+    users = user.get_inst_login_users(id)
+    template_response("/pages/institution_frontpage.mako", response,
+        name = name,
+        users = users
+    )
+    return response
+
 @expose("/institution/login")
 def institution_login():
     errors = set()
@@ -36,6 +52,25 @@ def institution_login():
 def institution_logout():
     institution.logout()
     return redirect (url_for("index"))
+
+@expose("/bruger")
+def user_frontpage():
+    from fprojekt.models.documentation import get_list_by_user
+    from fprojekt.models.user import is_authed, get_session_user_id, get_frontpage_data
+    response = Response()
+    
+    if not is_authed():
+        return redirect(url_for("index"))
+    
+    userid = get_session_user_id()
+    username, = get_frontpage_data(userid)
+    documents = get_list_by_user(userid)
+    
+    template_response("/pages/user_frontpage.mako", response,
+        username = username,
+        documents = documents
+    )
+    return response
 
 @expose("/bruger/login")
 @expose("/bruger/login/<string:email>")
@@ -60,32 +95,70 @@ def user_logout():
     user.logout()
     return redirect (url_for("index"))
 
-@expose("/administration/login")
-def admin_login():
+@expose("/bruger/profil/<int:id>")
+def user_profile(id):
+    from fprojekt.lib.string import validEmail
     response = Response()
-    template_response("/pages/admin_login.mako", response)
-    return response
-
-@expose("/institution")
-def institution_frontpage():
-    response = Response()
+    authed_user = user.get_session_user_id()==id
+    input_errors = set()
     
-    if not institution.is_authed():
-        return redirect(url_for("index"))
+    if authed_user: # Viewing own profile (Possible to change data)
+        db_name, db_email, db_password = user.get_data(id)
+        name = local.request.form.get("name", db_name)
+        email = local.request.form.get("email", db_email)
+        new_password = local.request.form.get("new_password", u"")
+        new_password_repeat = local.request.form.get("new_password_repeat", u"")
+    else:
+        db_name, db_email, name, email = "", "", "", ""
+        input_errors.add("not_authorized")
 
-    id = institution.get_session_institution_id()
-    name = institution.get_name(id)
-    users = user.get_inst_login_users(id)
-    template_response("/pages/institution_frontpage.mako", response,
+    if local.request.method=="POST":
+        if(len(email) == 0):
+            input_errors.add("email_empty")
+        else:
+            if not validEmail(email):
+                input_errors.add("email_invalid")            
+        if(len(new_password) > 0):
+            if(new_password_repeat != new_password):
+                input_errors.add("passwords_not_the_same")
+
+        if(len(input_errors) == 0 and authed_user):
+            # update email NOT password
+            user.update(
+                id = id,
+                name = name,
+                email = email,
+                password = db_password
+            )
+            if(len(new_password) > 0):
+                # update all settings
+                user.update(
+                    id = id,
+                    name = name,
+                    email = email,
+                    password = new_password
+                )
+
+    template_response("/pages/user_profile_edit.mako", response,
+        input_errors = input_errors,
+        id = id,
+        db_name = db_name,
+        db_email = db_email,
         name = name,
-        users = users
+        email = email
     )
-    return response
+    return response    
 
 @expose("/administration")
 def admin_frontpage():
     response = Response()
     template_response("/pages/admin_frontpage.mako", response)
+    return response
+
+@expose("/administration/login")
+def admin_login():
+    response = Response()
+    template_response("/pages/admin_login.mako", response)
     return response
 
 @expose("/administration/institution")
@@ -303,27 +376,6 @@ def user_delete(id):
         )
     return response
 
-def notfound():
-    response = Response()
-    template_response("/pages/errors/notfound.mako", response)
-    return response
-
-def error():
-	response = Response()
-	template_response("/pages/errors/error.mako", response)
-	return response
-
-@expose("/debug")
-def session_debug():
-    if local.application.debug == False:
-        return notfound()
-    from pprint import pformat
-    local.session.init()
-    response = Response(pformat(local.session.data))
-    response.mimetype="text/plain"
-    response.charset = "utf-8"
-    return response
-
 @expose("/dokumentation/print/<int:id>")
 def documentation_print(id):
     response = Response()
@@ -368,23 +420,39 @@ def documentation_edit(id):
     )
     return response
 
-@expose("/bruger")
-def user_frontpage():
-    from fprojekt.models.documentation import get_list_by_user
-    from fprojekt.models.user import is_authed, get_session_user_id, get_frontpage_data
+
+@expose("/dokumentation/gem")
+def document_save():
     response = Response()
-    
-    if not is_authed():
-        return redirect(url_for("index"))
-    
-    userid = get_session_user_id()
-    username, = get_frontpage_data(userid)
-    documents = get_list_by_user(userid)
-    
-    template_response("/pages/user_frontpage.mako", response,
-        username = username,
-        documents = documents
-    )
+    from fprojekt.models.documentation import update_section
+    import json
+    section_json = local.request.form.get("section")
+    section = json.loads(section_json)
+    id = section["id"]
+    title = section["title"]
+    content = section["content"]
+    update_section(id, title, content)
+    return response
+
+def notfound():
+    response = Response()
+    template_response("/pages/errors/notfound.mako", response)
+    return response
+
+def error():
+	response = Response()
+	template_response("/pages/errors/error.mako", response)
+	return response
+
+@expose("/debug")
+def session_debug():
+    if local.application.debug == False:
+        return notfound()
+    from pprint import pformat
+    local.session.init()
+    response = Response(pformat(local.session.data))
+    response.mimetype="text/plain"
+    response.charset = "utf-8"
     return response
 
 @expose("/laereplan")

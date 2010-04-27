@@ -242,7 +242,6 @@ html
     display:none;
 }
 
-
 #topmenu{
     float:left;
     width:100%;
@@ -308,3 +307,30 @@ body>#main.section-other {
     background:url('/static/images/trans-other.png');
 }
 
+/* User profile page */
+#userprofile {
+    width:100%;
+}
+#userprofile td {
+    border:none;
+}
+td.userprofile_col_attr {
+    width:150px;
+}
+td.userprofile_col_content input {
+    width:250px;
+}
+td.userprofile_col_content {
+    width:auto;
+}
+td.userprofile_col_content input[disabled] {
+    background: #ebebe4;
+}
+#userprofile_image {
+    vertical-align:top;
+    width:0;
+}
+span.error_message {
+    color: #f00;
+    font-weight: 600;
+}

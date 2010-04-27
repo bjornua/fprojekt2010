@@ -15,11 +15,9 @@ initial_doc = {
 <form id="editor_area">
     <h1><span id="title_field"></span></h1>
     <h3>Skrevet af <span id="author_field"></span></h3>
-</form>
+
 <script type="text/javascript">
 var doc = ${json(initial_doc)};
-
-
 
 $("#author_field").text(doc.author);
 $("#title_field").text(doc.title);
@@ -47,11 +45,29 @@ for(i in doc.sections){
     $(container).addClass("section_container");
     $(title).addClass("section_title");
     $(editor).addClass("widgEditor");
-    
 
     $("#editor_area").append(container);
 
 }
 
+function getSectionContent(section){
+    frameId = "section" + String(section) + "WidgIframe";
+    return $("#iframeBody", window.frames[frameId].document).html();
+}
+
+function save(){
+    for(i in doc.sections){
+        section = doc.sections[i];
+        id = section.id;
+        title = $(section.elements.title).text();
+        content = getSectionContent(section.id);
+        data = {"id":id, "title":title, "content":content};
+        $.post("${url_for("document_save")}", {"section":JSON.stringify(data)},
+        function(data){}, "json");
+    }
+}
 </script>
+
+<input type="button" value="Gem" id="save_documentation" onclick="javascript:save();" />
+</form>
 
