@@ -94,6 +94,60 @@ def user_logout():
     user.logout()
     return redirect (url_for("index"))
 
+@expose("/bruger/profil/<int:id>")
+def user_profile(id):
+    from fprojekt.lib.string import validEmail
+    response = Response()
+    authed_user = user.get_session_user_id()==id
+    input_errors = set()
+    
+    if authed_user: # Viewing own profile (Possible to change data)
+        db_name, db_email, db_password = user.get_data(id)
+        name = local.request.form.get("name", db_name)
+        email = local.request.form.get("email", db_email)
+        new_password = local.request.form.get("new_password", u"")
+        new_password_repeat = local.request.form.get("new_password_repeat", u"")
+    else:
+        db_name, db_email, name, email = "", "", "", ""
+        input_errors.add("not_authorized")
+
+    if local.request.method=="POST":
+        if(len(email) == 0):
+            input_errors.add("email_empty")
+        else:
+            if not validEmail(email):
+                input_errors.add("email_invalid")            
+        if(len(new_password) > 0):
+            if(new_password_repeat != new_password):
+                input_errors.add("passwords_not_the_same")
+
+        if(len(input_errors) == 0 and authed_user):
+            # update email NOT password
+            user.update(
+                id = id,
+                name = name,
+                email = email,
+                password = db_password
+            )
+            if(len(new_password) > 0):
+                # update all settings
+                user.update(
+                    id = id,
+                    name = name,
+                    email = email,
+                    password = new_password
+                )
+
+    template_response("/pages/user_profile_edit.mako", response,
+        input_errors = input_errors,
+        id = id,
+        db_name = db_name,
+        db_email = db_email,
+        name = name,
+        email = email
+    )
+    return response    
+
 @expose("/administration")
 def admin_frontpage():
     response = Response()

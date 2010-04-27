@@ -242,3 +242,31 @@ html
 #institution_login, #pedagogue_activate_form {
     display:none;
 }
+
+/* User profile page */
+#userprofile {
+    width:100%;
+}
+#userprofile td {
+    border:none;
+}
+td.userprofile_col_attr {
+    width:150px;
+}
+td.userprofile_col_content input {
+    width:250px;
+}
+td.userprofile_col_content {
+    width:auto;
+}
+td.userprofile_col_content input[disabled] {
+    background: #ebebe4;
+}
+#userprofile_image {
+    vertical-align:top;
+    width:0;
+}
+span.error_message {
+    color: #f00;
+    font-weight: 600;
+}
