@@ -38,15 +38,7 @@ def generate_institutions(connection):
     c = connection.cursor()
     test = [
         u"Brumbassen",u"Bøgely",u"Cathrine Asylet",u"Deutscher Kindergarden",
-        u"Ejsbølhus",u"Favrdal",u"Fjelstrup",u"Frk. Michaels",
-        u"Gram Børnehave",u"Hammelev",u"Havanna",u"Hoptrup",u"Kastaniegården",
-        u"Kastaniehaven",u"Kløverlykke",u"Kridthuset",u"Lærkereden",
-        u"Marie Nielsens",u"Marstup",u"Myretuen Bevtoft",u"Myretuen Fole",
-        u"Møllebakken",u"Møllehaven",u"Perlen",u"Povlsbjerg",u"Rosengården",
-        u"Ryeshave",u"Sct. Georgs Gården",u"Sdr. Otting",u"Skovreden",
-        u"Skrydstrup",u"Solstrålen",u"Stevelt Skovbhv",u"Sukkertoppen",
-        u"Søndergades bhv",u"Troldehaven",u"Troldemarken",u"Udsigten",
-        u"Vedsted",u"Vilstrup",u"Vænget"
+        u"Ejsbølhus",u"Favrdal",u"Fjelstrup",u"Frk. Michaels"
     ]
     password = (unicode(x) for x in xrange(len(test))).__iter__()
     test = ((x,generate_mail(x), generate_phone(),password.next()) for x in test)    
@@ -126,6 +118,20 @@ def generate_users(connection):
         from random import choice
         return "%s %s" % (choice(first_names),choice(last_names))
     
+    def generate_image():
+        # Makes a list of available image files, and choose a random image between them.
+        from random import choice
+        import Image
+        for dirpath, dirnames, filenames in os.walk('.'):
+            images = []
+            for filename in filenames:
+                try:
+                    Image.open(filename)
+                    images.append(filename)
+                except IOError:
+                    pass
+        return open(choice(images), 'rb').read()
+    
     c.execute("select id from institution")
     while True:
         insertcursor = connection.cursor()
@@ -140,11 +146,12 @@ def generate_users(connection):
             while True:
                 name = generate_name()
                 email = generate_mail(name)
+                image = generate_image()
                 try:
                     insertcursor.execute("""
-                        insert into user(name, email, institution_id, password, deleted)
-                        values(%s, %s, %s, "1234", false)
-                    """, (name,email,id))
+                        insert into user(name, email, institution_id, password, deleted, image)
+                        values(%s, %s, %s, "1234", false, %s)
+                    """, (name,email,id, image))
                     break
                 except IntegrityError:
                     i+=1

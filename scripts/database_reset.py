@@ -72,6 +72,7 @@ def create_tables(connection):
             `name` varchar(255) default null,
             `institution_id` int unsigned default null,
             `deleted` bool default false,
+            `image` BLOB,
             primary key (`id`),
             unique `email` (`email`),
             index `auth` (deleted,`email`(10),`password`(10)),
