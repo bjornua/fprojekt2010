@@ -444,6 +444,12 @@ def error():
 	template_response("/pages/errors/error.mako", response)
 	return response
 
+@expose("/vis/billede/<int:id>")
+def show_image(id):
+    response = Response(user.get_image(id))
+    response.mimetype="image/jpeg"
+    return response
+
 @expose("/debug")
 def session_debug():
     if local.application.debug == False:

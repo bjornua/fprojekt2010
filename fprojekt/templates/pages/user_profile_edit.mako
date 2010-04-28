@@ -16,7 +16,7 @@
             <td class="userprofile_col_attr"><label for="name">Navn:</label></td>
             <td class="userprofile_col_content"><input type="text" id="name" value=${esc_attr(name)} name="name" disabled /></td>
             <td rowspan="6" id="userprofile_image">
-                <img src="/static/images/test-portr%C3%A6t.png" title=${esc_attr(name)} alt=${esc_attr(name)} />
+                <img src="${url_for("show_image",id=id)}" title=${esc_attr(name)} alt=${esc_attr(name)} width="250" />
             </td>
         </tr>
         <tr>

@@ -78,6 +78,21 @@ def get_data(id):
         c.close()
         pool.give(conn)
 
+def get_image(id):
+    conn = pool.take()
+    c = conn.cursor()
+    c.execute(
+        """select image
+        from user where id = %s and deleted=false""",
+        (id,)
+    )
+    conn.commit()
+    try:
+        return c.fetchone()
+    finally:
+        c.close()
+        pool.give(conn)
+
 def id_exists(id):
     conn = pool.take()
     c = conn.cursor()
@@ -152,13 +167,11 @@ def is_authed():
 def get_session_user_id():
     return local.session.get("login_user")
 
-
-
 def get_inst_login_users(inst_id):
     conn = pool.take()
     c = conn.cursor()
     c.execute(
-        """select name, email
+        """select id, name, email
         from user
         where institution_id=%s and deleted=false""",
         (inst_id,)
