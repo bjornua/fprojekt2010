@@ -167,6 +167,7 @@ html
 }
 
 #logotext {
+    float: left;
     margin: 0;
     font-size: 240%;
     background: #CCC;

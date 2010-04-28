@@ -8,7 +8,7 @@
     )
 %>
 <div id="topmenu">
-    <h1 id="logotext" style="float:left;">
+    <h1 id="logotext">
         PædagogNet
     </h1>
     <ul id="main-navigation">
