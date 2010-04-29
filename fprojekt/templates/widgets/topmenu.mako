@@ -1,21 +1,27 @@
 ## -*- coding: utf-8 -*-
 <%
     links = (
-        (u"Dokumentation", "documentation", url_for("user_frontpage")),
-        (u"Læreplaner"   , "curriculum"   , url_for("curriculum_frontpage")),
-        (u"Evaluering"   , "evaluation"   , url_for("evaluation_frontpage")),
-        (u"Andet"        , "other"        , url_for("admin_frontpage")),
+        ("documentation", u"Dokumentation", url_for("user_frontpage"      )),
+        ("curriculum"   , u"Læreplaner"   , url_for("curriculum_frontpage")),
+        ("evaluation"   , u"Evaluering"   , url_for("evaluation_frontpage")),
+        ("other"        , u"Andet"        , url_for("admin_frontpage"     )),
+        ("logout"       , u"Log ud"       , url_for("user_logout"         )),
     )
 %>
 <div id="topmenu">
-    <h1 id="logotext" style="float:left;">
+    <h1 id="logotext">
         PædagogNet
     </h1>
+    <h1 id="section-header" class="${active_section}">
+        <img src="/static/images/icons/big/${active_section}.png" />
+        ${[x[1] for x in links if x[0] == active_section][0]}
+    </h1>
     <ul id="main-navigation">
-% for name, section, link in links:
-        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${link}"><img src="/static/images/icons/${section}.png"/> ${name}</a></li>
+% for link in links:
+<%
+    section, name, url = link
+%>
+        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${url}"><img src="/static/images/icons/${section}.png"/> ${name}</a></li>
 % endfor
     </ul>
 </div>
-
-

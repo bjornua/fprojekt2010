@@ -167,19 +167,33 @@ html
 }
 
 #logotext {
+    float: left;
     margin: 0;
     font-size: 240%;
-    background: #CCC;
+    color: #FFF;
+    background: #000;
     border: 1px solid #000;
-    padding: 5px 50px;
+    padding: 20px 28px;
 }
-
+#section-header {
+    margin:0 0 6px 0;
+    padding:5px;
+    float:right;
+    width:481px;
+    background:#E97F02;
+    color:#FFF;
+    border:1px solid #000;
+    text-align:right;
+}
+#section-header > img {
+    vertical-align:middle;
+    padding-right:5px;
+}
 
 #login-status {
     border-bottom:1px solid #000;
     margin-top:0;
 }
-
 
 #document_table {
     border-collapse:collapse;
@@ -214,11 +228,8 @@ html
     padding-right:10px;
 }
 #document_table .col_created, #document_table .col_modified, #document_table .col_word_count {
-    white-space:nowrap;
+    white-space: nowrap;
     text-align: center;
-}
-
-#inst_login {
 }
 
 #inst_login > table {
@@ -228,9 +239,7 @@ html
 }
 #inst_login > table td{
     text-align:center;
-
 }
-
 
 #pedagogue_activate_form, #institution_activate_form {
     border:1px solid #000;
@@ -247,7 +256,7 @@ html
     display:none;
 }
 
-#topmenu{
+#topmenu {
     float:left;
     width:100%;
     border-bottom:1px solid #000;
@@ -258,7 +267,7 @@ html
 #main-navigation {
     margin: 0;
     float: right;
-    padding: 0 5px;
+    padding: 0;
 }
 
 #main-navigation > li{
@@ -271,34 +280,39 @@ html
     border:1px solid #000;
     color:#FFF;
     padding:5px;
-    float:left;
     text-decoration: none;
-    vertical-align: middle;
     display: block;
+    white-space:nowrap;
+}
+#main-navigation > li > a:hover {
+
 }
 #main-navigation > li > a > img{
-    float:left;
-    padding-right:5px;
-    display:block;
+    vertical-align:middle;
+    padding-right:1px;
 }
 #main-navigation li:first-child {
     margin: 0 0 0 0;
 }
 #main-navigation #link-documentation {
-    background:#5964B2;
+    background:#4479D4;
 }
-#main-navigation #link-documentation:hover, #main-navigation #link-documentation.topmenu-active {
-    background:#4B538B;
+#main-navigation #link-documentation:hover,
+#main-navigation #link-documentation.topmenu-active,
+#section-header.documentation {
+    background:#1049A9;
 }
 body>#main.section-documentation {
     background:url('/static/images/trans-documentation.png');
     border:2px solid #4B538B;
 }
 #main-navigation #link-curriculum {
-    background:#E04885;
+    background:#D235D2;
 }
-#main-navigation #link-curriculum:hover, #main-navigation #link-curriculum.topmenu-active {
-    background:#D60257;
+#main-navigation #link-curriculum:hover,
+#main-navigation #link-curriculum.topmenu-active,
+#section-header.curriculum {
+    background:#A600A6;
 }
 body>#main.section-curriculum {
     background:url('/static/images/trans-curriculum.png');
@@ -307,7 +321,9 @@ body>#main.section-curriculum {
 #main-navigation #link-evaluation {
     background:#FA6A48;
 }
-#main-navigation #link-evaluation:hover, #main-navigation #link-evaluation.topmenu-active {
+#main-navigation #link-evaluation:hover,
+#main-navigation #link-evaluation.topmenu-active,
+#section-header.evaluation {
     background:#E45635;
 }
 body>#main.section-evaluation {
@@ -317,8 +333,16 @@ body>#main.section-evaluation {
 #main-navigation #link-other {
     background: #F28D16;
 }
-#main-navigation #link-other:hover, #main-navigation #link-other.topmenu-active  {
+#main-navigation #link-other:hover,
+#main-navigation #link-other.topmenu-active,
+#section-header.other {
     background: #E97F02;
+}
+#main-navigation #link-logout {
+    background: #FF9440;
+}
+#main-navigation #link-logout:hover  {
+    background: #FF7400;
 }
 
 body>#main.section-other {
