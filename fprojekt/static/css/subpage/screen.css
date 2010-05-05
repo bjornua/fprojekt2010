@@ -302,20 +302,20 @@ body {
 #main-navigation #link-documentation:hover,
 #main-navigation #link-documentation.topmenu-active,
 #section-header.documentation {
-    background-position-y: -32px;
+    background-position:0 -32px;
 }
 body>#main.section-documentation {
     background:url('/static/images/trans-documentation.png');
     border:2px solid #4B538B;
 }
 #main-navigation #link-curriculum {
-    background-position-y: -64px;
+    background-position: 0 -64px;
     width:102px;
 }
 #main-navigation #link-curriculum:hover,
 #main-navigation #link-curriculum.topmenu-active,
 #section-header.curriculum {
-    background-position-y: -96px;
+    background-position: 0 -96px;
 
 }
 body>#main.section-curriculum {
@@ -323,33 +323,33 @@ body>#main.section-curriculum {
     border:2px solid #D60257;
 }
 #main-navigation #link-evaluation {
-    background-position-y: -128px;
+    background-position: 0 -128px;
     width:102px;
 }
 #main-navigation #link-evaluation:hover,
 #main-navigation #link-evaluation.topmenu-active,
 #section-header.evaluation {
-    background-position-y: -160px;
+    background-position: 0 -160px;
 }
 body>#main.section-evaluation {
     background:url('/static/images/trans-evaluation.png');
     border:2px solid #E45635;
 }
 #main-navigation #link-other {
-    background-position-y: -192px;
+    background-position: 0 -192px;
     width:71px;
 }
 #main-navigation #link-other:hover,
 #main-navigation #link-other.topmenu-active,
 #section-header.other {
-    background-position-y: -224px;
+    background-position: 0 -224px;
 }
 #main-navigation #link-logout {
-    background-position-y: -256px;
+    background-position: 0 -256px;
     width:75px;
 }
 #main-navigation #link-logout:hover  {
-    background-position-y: -288px;
+    background-position: 0 -288px;
 }
 
 body>#main.section-other {
