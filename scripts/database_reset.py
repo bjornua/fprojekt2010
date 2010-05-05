@@ -24,6 +24,9 @@ def get_connection():
 def drop_tables(connection):
     c = connection.cursor()
     
+    c.execute("drop table if exists `child_has_child_group`")
+    c.execute("drop table if exists `child`")
+    c.execute("drop table if exists `child_group`")
     c.execute("drop table if exists `documentation_section`")
     c.execute("drop table if exists `documentation`")
     c.execute("drop table if exists `outgoing_mail`")
@@ -148,6 +151,52 @@ def create_tables(connection):
             constraint `documentation` foreign key (`documentation_id`) references `documentation` (`id`)
                 on delete cascade
                 on update cascade
+        )
+        engine=InnoDB
+        default charset=utf8
+        collate=utf8_danish_ci
+        pack_keys=1
+    """)
+    c.execute("""
+        create table `child_group` (
+            `id` int unsigned not null auto_increment,
+            `name` varchar(255) default null,
+            `institution_id` int unsigned default null,
+            `deleted` bool default false,
+            primary key (`id`),
+            constraint `institution_group` foreign key (`institution_id`) references `institution` (`id`)
+                on delete cascade
+                on update cascade
+        )
+        engine=InnoDB
+        default charset=utf8
+        collate=utf8_danish_ci
+        pack_keys=1
+    """)
+    c.execute("""
+        create table `child` (
+            `id` int unsigned not null auto_increment,
+            `name` varchar(255) default null,
+            `institution_id` int unsigned default null,
+            `deleted` bool default false,
+            `image` BLOB,
+            primary key (`id`),
+            constraint `institution_child` foreign key (`institution_id`) references `institution` (`id`)
+                on delete cascade
+                on update cascade
+        )
+        engine=InnoDB
+        default charset=utf8
+        collate=utf8_danish_ci
+        pack_keys=1
+    """)
+    c.execute("""
+        create table `child_has_child_group` (
+            `child_id` int unsigned not null,
+            `group_id` int unsigned not null,
+            primary key (`child_id`, `group_id`),
+            constraint `child` foreign key (`child_id`) references `child` (`id`),
+            constraint `child_group` foreign key (`group_id`) references `child_group` (`id`)
         )
         engine=InnoDB
         default charset=utf8

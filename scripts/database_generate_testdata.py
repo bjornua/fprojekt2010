@@ -477,6 +477,164 @@ def generate_document_sections(connection):
         insertcursor.close()
     connection.commit()
     c.close()
+
+def generate_children(connection):
+    c = connection.cursor()
+    first_names = [
+        u"Marie",u"Peter",u"Christian",u"Erik",u"Anna",u"Jens",u"Hans",
+        u"Margrethe",u"Niels",u"Jørgen",u"Karen",u"Kirstine",u"Kristian",
+        u"Kirsten",u"Johanne",u"Henrik",u"Poul",u"Elisabeth",u"Svend",u"Søren",
+        u"Aage",u"Michael",u"Lars",u"Else",u"Ole",u"Anne",u"Martin",u"Inger",
+        u"Anders",u"Mette",u"Thomas",u"Louise",u"Johannes",u"Maria",u"Ellen",
+        u"Knud",u"Kristine",u"Hanne",u"Sofie",u"Jan",u"Emil",u"John",u"Inge",
+        u"Bent",u"Karl",u"Carl",u"Henning",u"Per",u"Susanne",u"Frederik",
+        u"Rasmus",u"Morten",u"Helle",u"Andreas",u"Jesper",u"Grethe",u"Arne",
+        u"Marianne",u"Kim",u"Lene",u"Gerda",u"Børge",u"Peder",u"Birthe",
+        u"Charlotte",u"Bente",u"Birgit",u"Tove",u"Flemming",u"Edith",u"Ruth",
+        u"Kaj",u"Mads",u"Kathrine",u"Pia",u"Lone",u"Christine",u"Camilla",
+        u"Emilie",u"Leif",u"Jytte",u"Jette",u"Torben",u"Kurt",u"Birgitte",
+        u"Mogens",u"Helene",u"Bodil",u"Julie",u"Steen",u"Jacob",u"Henry",u"Lis",
+        u"Ove",u"Katrine",u"Lise",u"Ulla",u"Bjarne",u"Finn",u"Claus",u"Gitte",
+        u"Ingeborg",u"Eva",u"Tina",u"Preben",u"Bo",u"Gudrun",u"Irene",u"Otto",
+        u"Mikkel",u"Cecilie",u"Allan",u"Carsten",u"Ane",u"Christina",u"Vibeke",
+        u"Ingrid",u"Jakob",u"Marius",u"Johan",u"Brian",u"Annette",u"Ida",
+        u"Egon",u"Rikke",u"Holger",u"Emma",u"Alfred",u"Laura",u"Mathias",
+        u"Viggo",u"Daniel",u"Jonas",u"Simon",u"Karin",u"Valdemar"
+    ]
+    last_names = [
+        u"Nielsen",u"Hansen",u"Pedersen",u"Andersen",u"Christensen",u"Larsen",
+        u"Sørensen",u"Rasmussen",u"Petersen",u"Jørgensen",u"Madsen",
+        u"Kristensen",u"Olsen",u"Christiansen",u"Thomsen",u"Poulsen",
+        u"Johansen",u"Knudsen",u"Mortensen",u"Møller",u"Jacobsen",u"Jakobsen",
+        u"Olesen",u"Frederiksen",u"Mikkelsen",u"Henriksen",u"Laursen",u"Lund",
+        u"Schmidt",u"Eriksen",u"Holm",u"Kristiansen",u"Clausen",u"Simonsen",
+        u"Svendsen",u"Andreasen",u"Iversen",u"Jeppesen",u"Mogensen",
+        u"Jespersen",u"Nissen",u"Lauridsen",u"Frandsen",u"Østergaard",
+        u"Jepsen",u"Kjær",u"Carlsen",u"Vestergaard",u"Jessen",u"Nørgaard",
+        u"Dahl",u"Christoffersen",u"Skov",u"Søndergaard",u"Bertelsen",u"Bruun",
+        u"Lassen",u"Bach",u"Gregersen",u"Friis",u"Johnsen",u"Steffensen",
+        u"Kjeldsen",u"Bech",u"Krogh",u"Lauritsen",u"Danielsen",u"Mathiesen",
+        u"Andresen",u"Brandt",u"Winther",u"Toft",u"Ravn",u"Mathiasen",u"Dam",
+        u"Holst",u"Nilsson",u"Lind",u"Berg",u"Schou",u"Overgaard",
+        u"Kristoffersen",u"Schultz",u"Klausen",u"Karlsen",u"Paulsen",
+        u"Hermansen",u"Thorsen",u"Koch",u"Thygesen",u"Bak",u"Kruse",u"Bang",
+        u"Juhl",u"Davidsen",u"Berthelsen",u"Nygaard",u"Lorentzen",u"Villadsen",
+        u"Lorenzen",u"Damgaard",u"Bjerregaard",u"Lange",u"Hedegaard",
+        u"Bendtsen",u"Lauritzen",u"Svensson",u"Justesen",u"Juul",u"Hald",
+        u"Kofoed",u"Søgaard",u"Munk",u"Meyer",u"Kjærgaard",u"Riis",u"Johannsen",
+        u"Carstensen",u"Bonde",u"Ibsen",u"Fischer",u"Andersson",u"Bundgaard",
+        u"Aagaard",u"Johannesen",u"Eskildsen",u"Hemmingsen",u"Andreassen",
+        u"Thomassen",u"Schrøder",u"Persson",u"Hjorth",u"Enevoldsen",u"Nguyen",
+        u"Henningsen",u"Jønsson",u"Olsson",u"Asmussen",u"Michelsen",u"Vinther",
+        u"Markussen",u"Kragh",u"Thøgersen",u"Johansson",u"Dalsgaard",u"Gade",
+        u"Bjerre",u"Ali",u"Laustsen",u"Buch",u"Ludvigsen",u"Hougaard",u"Beck",
+        u"Kirkegaard",u"Marcussen",u"Mølgaard",u"Ipsen",u"Sommer",u"Ottosen",
+        u"Müller",u"Krog",u"Hoffmann",u"Clemmensen",u"Nikolajsen",u"Brodersen",
+        u"Therkildsen",u"Leth",u"Michaelsen",u"Graversen",u"Frost",u"Dalgaard"
+    ]
+
+    def generate_name():
+        from random import choice
+        return "%s %s" % (choice(first_names),choice(last_names))
+    
+    def generate_image():
+        # Makes a list of available image files, and choose a random image between them.
+        from random import choice
+        import Image
+        for dirpath, dirnames, filenames in os.walk('.'):
+            images = []
+            for filename in filenames:
+                try:
+                    Image.open(filename)
+                    images.append(filename)
+                except IOError:
+                    pass
+        return open(choice(images), 'rb').read()
+    
+    c.execute("select id from institution")
+    while True:
+        insertcursor = connection.cursor()
+        row = c.fetchone()
+        if row == None:
+            break
+        (id,) = row
+        from random import randint
+        from MySQLdb import IntegrityError
+        i=0
+        for x in xrange(randint(12,15)):
+            while True:
+                name = generate_name()
+                image = generate_image()
+                try:
+                    insertcursor.execute("""
+                        insert into child(name, institution_id, deleted, image)
+                        values(%s, %s, false, %s)
+                    """, (name, id, image))
+                    break
+                except IntegrityError:
+                    i+=1
+    connection.commit()
+    insertcursor.close()
+    c.close()
+
+def generate_childgroups(connection):
+    group_names = [
+        u"Rød Stue",u"Udsatte børn",u"Skovtur",u"Glade børn"
+    ]
+    c = connection.cursor()
+    c.execute("select id from institution")
+    while True:
+        insertcursor = connection.cursor()
+        row = c.fetchone()
+        if row == None:
+            break
+        (id,) = row
+        from random import randint, choice
+        from MySQLdb import IntegrityError
+        i=0
+        for x in xrange(randint(3,5)):
+            while True:
+                name = choice(group_names)
+                try:
+                    insertcursor.execute("""
+                        insert into child_group(name, institution_id, deleted)
+                        values(%s, %s, false)
+                    """, (name, id))
+                    break
+                except IntegrityError:
+                    i+=1
+    connection.commit()
+    insertcursor.close()
+    c.close()
+
+def generate_relations_childrens(connection):
+    c = connection.cursor()
+    c.execute("select id, institution_id from child")
+    while True:
+        insertcursor = connection.cursor()
+        row = c.fetchone()
+        if row == None:
+            break
+        (id,institution_id) = row
+        from random import randint, choice
+        from MySQLdb import IntegrityError
+        
+        group_c = connection.cursor()
+        group_c.execute("select id from child_group where institution_id = %s", institution_id)
+        group_ids = group_c.fetchall()
+        group_c.close()
+
+        for x in xrange(randint(0,3)):
+            try:
+                insertcursor.execute("""
+                    insert into child_has_child_group(child_id, group_id)
+                    values(%s, %s)
+                """, (id, choice(group_ids)[0]))
+            except IntegrityError:
+                break
+    connection.commit()
+    insertcursor.close()
+    c.close()
     
 if __name__ == "__main__":
     print "Connecting to database"
@@ -489,5 +647,11 @@ if __name__ == "__main__":
     generate_documents(connection)
     print "Generating fake document sections"
     generate_document_sections(connection)
+    print "Generating fake childrens"
+    generate_children(connection)
+    print "Generating fake groups"
+    generate_childgroups(connection)
+    print "Generating fake children relations"
+    generate_relations_childrens(connection)
     print "Disconnecting from database (might take a while)"
     connection.close()
