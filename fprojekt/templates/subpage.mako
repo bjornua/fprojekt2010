@@ -12,7 +12,10 @@
     <script type="text/javascript" src="/static/javascript/contrib/wysiwyg-1.0.1.js"></script>
     <script type="text/javascript" src="/static/javascript/contrib/jquery-1.4.2.min.js"></script>
 </head>
+
+<body>
 <div id="main" class=${esc_attr("section-"+section)}>
 ${widget.topmenu(section)}
 ${next.body()}
 </div>
+</body>
