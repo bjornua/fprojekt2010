@@ -138,9 +138,14 @@ html
   background: url('/static/images/background.png') #0c192a no-repeat center top fixed;
 }
 
+body {
+    float:left;
+    width:100%;
+}
+
 #main {
     width:750px;
-    margin:40px auto 20px -395px;
+    margin:40px auto 180px -395px;
     border:1px solid #000;
     float:left;
     position:relative;
