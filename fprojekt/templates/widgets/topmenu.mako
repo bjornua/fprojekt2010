@@ -21,7 +21,7 @@
 <%
     section, name, url = link
 %>
-        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${url}"><img src="/static/images/icons/${section}.png"/> ${name}</a></li>
+        <li><a id="link-${section}" ${active_section == section and 'class="topmenu-active" ' or ""}href="${url}"></a></li>
 % endfor
     </ul>
 </div>

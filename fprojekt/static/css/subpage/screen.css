@@ -138,9 +138,14 @@ html
   background: url('/static/images/background.png') #0c192a no-repeat center top fixed;
 }
 
+body {
+    float:left;
+    width:100%;
+}
+
 #main {
     width:750px;
-    margin:40px auto 20px -395px;
+    margin:40px auto 180px -395px;
     border:1px solid #000;
     float:left;
     position:relative;
@@ -277,12 +282,9 @@ html
 }
 
 #main-navigation > li > a {
-    border:1px solid #000;
-    color:#FFF;
-    padding:5px;
-    text-decoration: none;
     display: block;
-    white-space:nowrap;
+    height:32px;
+    background:url('/static/images/buttons.png');
 }
 #main-navigation > li > a:hover {
 
@@ -295,54 +297,59 @@ html
     margin: 0 0 0 0;
 }
 #main-navigation #link-documentation {
-    background:#4479D4;
+    width:123px;
 }
 #main-navigation #link-documentation:hover,
 #main-navigation #link-documentation.topmenu-active,
 #section-header.documentation {
-    background:#1049A9;
+    background-position:0 -32px;
 }
 body>#main.section-documentation {
     background:url('/static/images/trans-documentation.png');
     border:2px solid #4B538B;
 }
 #main-navigation #link-curriculum {
-    background:#D235D2;
+    background-position: 0 -64px;
+    width:102px;
 }
 #main-navigation #link-curriculum:hover,
 #main-navigation #link-curriculum.topmenu-active,
 #section-header.curriculum {
-    background:#A600A6;
+    background-position: 0 -96px;
+
 }
 body>#main.section-curriculum {
     background:url('/static/images/trans-curriculum.png');
     border:2px solid #D60257;
 }
 #main-navigation #link-evaluation {
-    background:#FA6A48;
+    background-position: 0 -128px;
+    width:102px;
 }
 #main-navigation #link-evaluation:hover,
 #main-navigation #link-evaluation.topmenu-active,
 #section-header.evaluation {
-    background:#E45635;
+    background-position: 0 -160px;
 }
 body>#main.section-evaluation {
     background:url('/static/images/trans-evaluation.png');
     border:2px solid #E45635;
 }
 #main-navigation #link-other {
-    background: #F28D16;
+    background-position: 0 -192px;
+    width:71px;
 }
 #main-navigation #link-other:hover,
 #main-navigation #link-other.topmenu-active,
 #section-header.other {
-    background: #E97F02;
+    background-position: 0 -224px;
 }
 #main-navigation #link-logout {
-    background: #FF9440;
+    background-position: 0 -256px;
+    width:75px;
 }
 #main-navigation #link-logout:hover  {
-    background: #FF7400;
+    background-position: 0 -288px;
 }
 
 body>#main.section-other {
