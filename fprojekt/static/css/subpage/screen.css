@@ -282,12 +282,9 @@ body {
 }
 
 #main-navigation > li > a {
-    border:1px solid #000;
-    color:#FFF;
-    padding:5px;
-    text-decoration: none;
     display: block;
-    white-space:nowrap;
+    height:32px;
+    background:url('/static/images/buttons.png');
 }
 #main-navigation > li > a:hover {
 
@@ -300,54 +297,59 @@ body {
     margin: 0 0 0 0;
 }
 #main-navigation #link-documentation {
-    background:#4479D4;
+    width:123px;
 }
 #main-navigation #link-documentation:hover,
 #main-navigation #link-documentation.topmenu-active,
 #section-header.documentation {
-    background:#1049A9;
+    background-position-y: -32px;
 }
 body>#main.section-documentation {
     background:url('/static/images/trans-documentation.png');
     border:2px solid #4B538B;
 }
 #main-navigation #link-curriculum {
-    background:#D235D2;
+    background-position-y: -64px;
+    width:102px;
 }
 #main-navigation #link-curriculum:hover,
 #main-navigation #link-curriculum.topmenu-active,
 #section-header.curriculum {
-    background:#A600A6;
+    background-position-y: -96px;
+
 }
 body>#main.section-curriculum {
     background:url('/static/images/trans-curriculum.png');
     border:2px solid #D60257;
 }
 #main-navigation #link-evaluation {
-    background:#FA6A48;
+    background-position-y: -128px;
+    width:102px;
 }
 #main-navigation #link-evaluation:hover,
 #main-navigation #link-evaluation.topmenu-active,
 #section-header.evaluation {
-    background:#E45635;
+    background-position-y: -160px;
 }
 body>#main.section-evaluation {
     background:url('/static/images/trans-evaluation.png');
     border:2px solid #E45635;
 }
 #main-navigation #link-other {
-    background: #F28D16;
+    background-position-y: -192px;
+    width:71px;
 }
 #main-navigation #link-other:hover,
 #main-navigation #link-other.topmenu-active,
 #section-header.other {
-    background: #E97F02;
+    background-position-y: -224px;
 }
 #main-navigation #link-logout {
-    background: #FF9440;
+    background-position-y: -256px;
+    width:75px;
 }
 #main-navigation #link-logout:hover  {
-    background: #FF7400;
+    background-position-y: -288px;
 }
 
 body>#main.section-other {
