@@ -9,9 +9,7 @@
     )
 %>
 <div id="topmenu">
-    <h1 id="logotext">
-        PædagogNet
-    </h1>
+    <img src="/static/images/logo.png" alt="PædagogNET" id="logo-img" />
     <h1 id="section-header" class="${active_section}">
         <img src="/static/images/icons/big/${active_section}.png" />
         ${[x[1] for x in links if x[0] == active_section][0]}
