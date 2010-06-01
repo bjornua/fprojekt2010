@@ -135,7 +135,7 @@ pre,code,kbd,samp,tt {
 html
 {
   overflow-y: scroll;
-  background: url('/static/images/background.png') #0c192a no-repeat center top fixed;
+  background: url('/static/images/background.png') #292929 repeat-x center top fixed;
 }
 
 body {
